@@ -23,3 +23,14 @@ SELECT * FROM tb_book;
 SELECT * FROM tb_student;
 SELECT * FROM tb_teacher;
 SELECT * FROM tb_admin;
+
+
+ALTER TABLE tb_student ADD email_student varchar(45) NOT NULL, ADD password_student varchar(45) not null;
+alter table tb_teacher add email_teacher varchar(45) NOT NULL, ADD password_teacher varchar(45) not null;
+
+ALTER TABLE tb_admin
+CHANGE COLUMN password_adim password_admin varchar(45) not null;
+
+
+
+
