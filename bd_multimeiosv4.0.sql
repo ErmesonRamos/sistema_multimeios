@@ -1,6 +1,6 @@
 CREATE DATABASE bd_multimeios;
 USE bd_multimeios;
-CREATE TABLE tb_book (
+CREATE TABLE tb_book (  
     id_book INTEGER PRIMARY KEY AUTO_INCREMENT,
     title VARCHAR(90) NOT NULL,
     gender_book VARCHAR(45) NOT NULL,
@@ -23,6 +23,8 @@ SELECT * FROM tb_book;
 SELECT * FROM tb_student;
 SELECT * FROM tb_teacher;
 SELECT * FROM tb_admin;
+
+ALTER TABLE tb_book ADD author VARCHAR(40);
 
 
 ALTER TABLE tb_student ADD email_student varchar(45) NOT NULL, ADD password_student varchar(45) not null;
