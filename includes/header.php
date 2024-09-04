@@ -1,3 +1,22 @@
+<?php
+// Inicia o buffer de saída
+ob_start();
+
+// Inicia a sessão apenas se ainda não tiver sido iniciada
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
+
+// Verifica se as variáveis de sessão estão definidas
+if (!isset($_SESSION['loginUser'])) {
+    // Redireciona para a página inicial com a mensagem de acesso negado
+    header("Location: ../index.php?acao=negado");
+    exit;
+}
+
+// Inclui o script de saída
+include_once('sair.php');
+?>
 <!DOCTYPE html>
 <html>
 <head>

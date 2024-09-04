@@ -28,16 +28,6 @@ if(isset($_POST['email']) || isset($_POST['senha'])) {
   }
 }
 
-
-//if('permissao' == 'admin'){
-//  header("Location: paginas/conteudo/admin_pages/home.php");
-//}else if('permissao'== 'prof'){
-//  header("Location: paginas/conteudo/prof_pages/home.php");
-//}else{
-//  header("Location: paginas/conteudo/aluno_pages/home.php");
-//}
-
-
 ?>
 
 <!DOCTYPE html>

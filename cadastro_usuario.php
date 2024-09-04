@@ -111,7 +111,7 @@
           }
 
           // Prepara a consulta SQL para inserção dos dados do usuário
-          $cadastro = "INSERT INTO tb_user (foto_user, nome_user, email_user, senha_user) VALUES (:foto, :nome, :email, :senha)";
+          $cadastro = "INSERT INTO tb_student (name_student, class) VALUES (:name_student, :class)";
 
           try {
               $result = $conect->prepare($cadastro);
