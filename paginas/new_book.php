@@ -1,23 +1,62 @@
 <?php
 include_once("../config/conexao.php");
 
-if(isset($_POST['new_book'])){
+if (isset($_POST['new_book'])) {
     $titulo_livro = $_POST['titulo_livro'];
     $autor = $_POST['autor'];
     $genero_livro = $_POST['genero_livro'];
 
-    if(!empty($_FILES['capa_livro'])){
-        $formatosPermitidos = array("png", "jpg", "jpeg", "webp");
-        $extensao = pathinfo($_FILES['capa_livro'], PATHINFO_EXTENSION);
+    if (!empty($_FILES['capa_livro']['name'])) {
+        $formatosPermitidos = array("png", "jpg", "jpeg", "gif");
+        $extensao = pathinfo($_FILES['capa_livro']['name'], PATHINFO_EXTENSION);
 
-        if(in_array(strtolower($extensao), $formatosPermitidos)){
-            echo "Capa adicionada";
-        }else{
-            echo "Erro ao adicionar capa";
+        if (in_array(strtolower($extensao), $formatosPermitidos)) {
+            $pasta = "../img/";
+            $temporario = $_FILES['capa_livro']['tmp_name'];
+            $novoNomeCapa = uniqid() . ".$extensao";
+            $destino = $pasta . $novoNomeCapa;
+
+            // Verifique se o diretório existe
+            if (!is_dir($pasta)) {
+                echo "Diretório de upload não encontrado.";
+                exit();
+            }
+
+            // Verifique se o arquivo pode ser movido
+            if (move_uploaded_file($temporario, $destino)) {
+                echo "Imagem enviada com sucesso!";
+            } else {
+                $error = error_get_last();
+                echo 'Não foi possível fazer o upload do arquivo. Erro: ' . $error['message'];
+                exit();
+            }
+        } else {
+            echo 'Formato de arquivo não permitido.';
             exit();
         }
-    }else{
-        echo "Formato de imagem não permitido";
+    } else {
+        $novoNomeCapa = 'capa_padrao.jpeg';
+    }
+
+    $new_book = "INSERT INTO tb_book (title, gender_book, [autor], capa) VALUES (:titulo_livro, :genero_livro, :autor, :capa_livro)";
+
+    try {
+        $result = $conect->prepare($new_book);
+        $result->bindParam(':titulo_livro', $titulo_livro, PDO::PARAM_STR);
+        $result->bindParam(':genero_livro', $genero_livro, PDO::PARAM_STR);
+        $result->bindParam(':autor', $autor, PDO::PARAM_STR);
+        $result->bindParam(':capa_livro', $novoNomeCapa, PDO::PARAM_STR);
+        $result->execute();
+        $contar = $result->rowCount();
+    
+        if ($contar > 0) {
+            echo "Livro adicionado com sucesso!";
+        } else {
+            echo "Nenhum livro foi inserido. Verifique se os dados foram corretamente enviados.";
+        }
+    } catch (PDOException $e) {
+        error_log("Erro de PDO: " . $e->getMessage());
+        echo "Ocorreu um erro ao tentar inserir os dados: " . $e->getMessage();
     }
 }
 
@@ -30,7 +69,7 @@ if(isset($_POST['new_book'])){
     <title>Adicionar novo livro</title>
 </head>
 <body>
-    <form action="new_book.php" method="post">
+    <form action="new_book.php" method="post" enctype="multipart/form-data">
         <label for="titulo_livro">Título:</label>
         <input type="text" name="titulo_livro" id="titulo_livro">
         <label for="autor">Autor:</label>
@@ -42,4 +81,4 @@ if(isset($_POST['new_book'])){
         <input type="submit" name="new_book" value="Adicionar novo">
     </form>
 </body>
-</html>l
+</html>

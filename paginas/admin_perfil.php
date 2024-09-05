@@ -1,5 +1,5 @@
 <?php
-if($_SERVER["REQUEST METHOD"] == "POST"){
+if($_SERVER["request_method"] == "POST"){
     if(isset($_POST["botao_novo"])){
         header("Location:new_book.php");
     }
