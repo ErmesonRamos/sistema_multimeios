@@ -129,7 +129,7 @@
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <!-- Principal -->
           <li class="nav-item">
-            <a href="pages/widgets.html" class="nav-link">
+            <a href="#" class="nav-link">
               <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>
                 Principal
@@ -148,13 +148,13 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="pages/UI/general.html" class="nav-link">
+                <a href="../paginas/catalogo_autor.php" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Autor</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="pages/UI/icons.html" class="nav-link">
+                <a href="../paginas/catalogo_genero.php" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Gênero</p>
                 </a>
@@ -227,7 +227,7 @@
 
           <!-- Relatório -->
           <li class="nav-item has-treeview menu-open">
-            <a href="#" class="nav-link active">
+            <a href="#" class="nav-link">
               <i class="nav-icon fas fa-chart-pie"></i>
               <p>
                 Relatório

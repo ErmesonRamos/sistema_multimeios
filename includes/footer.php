@@ -2,7 +2,7 @@
 <footer class="main-footer">
     <strong>Copyright &copy; 2008-2024 Todos os diteitos reservados a EEEP José Maria Falcão.</strong>
     <div class="float-right d-none d-sm-inline-block">
-      <b>Versão</b> 1.0
+      <b>Versão</b> 2.0
     </div>
   </footer>
 

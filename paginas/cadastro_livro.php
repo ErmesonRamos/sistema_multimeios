@@ -57,8 +57,8 @@
           <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
         </div>
         <div class="book-card">
-          <img src="https://via.placeholder.com/250x350?text=Book+7" alt="Book 7">
-          <h3>Título do Livro 7</h3>
+          <img src="https://via.placeholder.com/250x350?text=Book+8" alt="Book 8">
+          <h3>Título do Livro 8</h3>
           <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
         </div>
       </div>
