@@ -13,8 +13,8 @@ if (isset($_POST['new_book'])) {
         if (in_array(strtolower($extensao), $formatosPermitidos)) {
             $pasta = "../img/";
             $temporario = $_FILES['capa_livro']['tmp_name'];
-            $novoNome = uniqid() . ".$extensao";
-            $destino = $pasta . $novoNome;
+            $novoNomeCapa = uniqid() . ".$extensao";
+            $destino = $pasta . $novoNomeCapa;
 
             // Verifique se o diretório existe
             if (!is_dir($pasta)) {
@@ -35,15 +35,17 @@ if (isset($_POST['new_book'])) {
             exit();
         }
     } else {
-        $novoNome = 'capa_padrao.jpeg';
+        $novoNomeCapa = 'capa_padrao.jpeg';
     }
 
-    $new_book = "INSERT INTO tb_book (title, gender_book) VALUES (:titulo_livro, :genero_livro)";
+    $new_book = "INSERT INTO tb_book (title, gender_book, [autor], capa) VALUES (:titulo_livro, :genero_livro, :autor, :capa_livro)";
 
     try {
         $result = $conect->prepare($new_book);
         $result->bindParam(':titulo_livro', $titulo_livro, PDO::PARAM_STR);
         $result->bindParam(':genero_livro', $genero_livro, PDO::PARAM_STR);
+        $result->bindParam(':autor', $autor, PDO::PARAM_STR);
+        $result->bindParam(':capa_livro', $novoNomeCapa, PDO::PARAM_STR);
         $result->execute();
         $contar = $result->rowCount();
     
@@ -56,12 +58,6 @@ if (isset($_POST['new_book'])) {
         error_log("Erro de PDO: " . $e->getMessage());
         echo "Ocorreu um erro ao tentar inserir os dados: " . $e->getMessage();
     }
-
-
-
-
-    
-    
 }
 
 ?>
