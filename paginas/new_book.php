@@ -5,6 +5,8 @@ if (isset($_POST['new_book'])) {
     $titulo_livro = $_POST['titulo_livro'];
     $autor = $_POST['autor'];
     $genero_livro = $_POST['genero_livro'];
+    $booking_day = $_POST['booking_day'];
+    $return_day = $_POST['return_day'];
 
     if (!empty($_FILES['capa_livro']['name'])) {
         $formatosPermitidos = array("png", "jpg", "jpeg", "gif");
@@ -38,7 +40,7 @@ if (isset($_POST['new_book'])) {
         $novoNomeCapa = 'capa_padrao.jpeg';
     }
 
-    $new_book = "INSERT INTO tb_book (title, gender_book, [autor], capa) VALUES (:titulo_livro, :genero_livro, :autor, :capa_livro)";
+    $new_book = "INSERT INTO tb_book (title, gender_book, author_book, picture, booking_day, return_day) VALUES (:titulo_livro, :genero_livro, :autor, :capa_livro, :booking_day, :return_day)";
 
     try {
         $result = $conect->prepare($new_book);
@@ -46,6 +48,8 @@ if (isset($_POST['new_book'])) {
         $result->bindParam(':genero_livro', $genero_livro, PDO::PARAM_STR);
         $result->bindParam(':autor', $autor, PDO::PARAM_STR);
         $result->bindParam(':capa_livro', $novoNomeCapa, PDO::PARAM_STR);
+        $result->bindParam(':booking_day', $booking_day, PDO::PARAM_STR);
+        $result->bindParam(':return_day', $return_day, PDO::PARAM_STR);
         $result->execute();
         $contar = $result->rowCount();
     
@@ -72,12 +76,16 @@ if (isset($_POST['new_book'])) {
     <form action="new_book.php" method="post" enctype="multipart/form-data">
         <label for="titulo_livro">Título:</label>
         <input type="text" name="titulo_livro" id="titulo_livro">
-        <label for="autor">Autor:</label>
-        <input type="text" name="autor" id="autor">
         <label for="genero_livro">Gênero:</label>
         <input type="text" name="genero_livro" id="genero_livro">
+        <label for="autor">Autor:</label>
+        <input type="text" name="autor" id="autor">
         <label for="capa_livro">Capa:</label>
         <input type="file" name="capa_livro" id="capa_livro">
+        <label for="booking_day">booking_day:</label>
+        <input type="date" name="booking_day" id="booking_day">
+        <label for="return_day">return_day:</label>
+        <input type="date" name="return_day" id="return_day">
         <input type="submit" name="new_book" value="Adicionar novo">
     </form>
 </body>
