@@ -1,5 +1,5 @@
 <?php
-include_once("../config/conexao.php");
+include_once("../../config/conexao.php");
 
 if (isset($_POST['new_book'])) {
     $titulo_livro = $_POST['titulo_livro'];
@@ -13,14 +13,14 @@ if (isset($_POST['new_book'])) {
         $extensao = pathinfo($_FILES['capa_livro']['name'], PATHINFO_EXTENSION);
 
         if (in_array(strtolower($extensao), $formatosPermitidos)) {
-            $pasta = "../img/";
+            $pasta = realpath(__DIR__ . "/../../img/capas/");
             $temporario = $_FILES['capa_livro']['tmp_name'];
             $novoNomeCapa = uniqid() . ".$extensao";
-            $destino = $pasta . $novoNomeCapa;
+            $destino = $pasta . DIRECTORY_SEPARATOR . $novoNomeCapa;
 
-            // Verifique se o diretório existe
-            if (!is_dir($pasta)) {
-                echo "Diretório de upload não encontrado.";
+            // Verifique se o diretório existe e é gravável
+            if (!is_dir($pasta) || !is_writable($pasta)) {
+                echo "Diretório de upload não encontrado ou não é gravável.";
                 exit();
             }
 

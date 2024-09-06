@@ -2,25 +2,28 @@
 include('config/conexao.php'); // Inclui o arquivo de conexão com o banco de dados
 
 // Verifica se o formulário foi enviado
-if (isset($_POST['botao'])) {
+if (isset($_POST['cadastrar'])) {
     // Recebe os dados do formulário
-    $nome = $_POST['nome'];
-    $email = $_POST['email'];
-    $senha = password_hash($_POST['senha'], PASSWORD_DEFAULT); // Usando hash seguro para a senha
+    $name_user = $_POST['name_user'];
+    $email_user = $_POST['email_user'];
+    $password_user = password_hash($_POST['password_user'], PASSWORD_DEFAULT); // Usando hash seguro para a senha
+    $class = $_POST['class'];
+    $booking_day = $_POST['booking_day'];
+    $return_day = $_POST['return_day'];
 
     // Verifica se foi enviado algum arquivo de foto
-    if (!empty($_FILES['foto']['name'])) {
+    if (!empty($_FILES['picture']['name'])) {
         $formatosPermitidos = array("png", "jpg", "jpeg", "gif"); // Formatos permitidos
-        $extensao = pathinfo($_FILES['foto']['name'], PATHINFO_EXTENSION); // Obtém a extensão do arquivo
+        $extensao = pathinfo($_FILES['picture']['name'], PATHINFO_EXTENSION); // Obtém a extensão do arquivo
 
         // Verifica se a extensão do arquivo está nos formatos permitidos
         if (in_array(strtolower($extensao), $formatosPermitidos)) {
-            $pasta = "img/"; // Define o diretório para upload
-            $temporario = $_FILES['foto']['tmp_name']; // Caminho temporário do arquivo
-            $novoNome = uniqid() . ".$extensao"; // Gera um nome único para o arquivo
+            $pasta = "img/avatares"; // Define o diretório para upload
+            $temporario = $_FILES['picture']['tmp_name']; // Caminho temporário do arquivo
+            $novoNomeAvatar = uniqid() . ".$extensao"; // Gera um nome único para o arquivo
 
             // Move o arquivo para o diretório de imagens
-            if (move_uploaded_file($temporario, $pasta . $novoNome)) {
+            if (move_uploaded_file($temporario, $pasta . $novoNomeAvatar)) {
                 // Sucesso no upload da imagem
             } else {
                 echo '<div class="container">
@@ -44,18 +47,21 @@ if (isset($_POST['botao'])) {
         }
     } else {
         // Define um avatar padrão caso não seja enviado nenhum arquivo de foto
-        $novoNome = 'avatar-padrao.png'; // Nome do arquivo de avatar padrão
+        $novoNomeAvatar = 'avatar_padrao.png'; // Nome do arquivo de avatar padrão
     }
 
     // Prepara a consulta SQL para inserção dos dados do usuário
-    $cadastro = "INSERT INTO tb_student (name_student, email_student, password_student, picture) VALUES (:nome, :email, :senha)";
+    $cadastro = "INSERT INTO tb_user (name_user, email_user, password_user, picture, class, booking_day, return_day) VALUES (:name_user, :email_user, :password_user, :picture, :class, :booking_day, :return_day)";
 
     try {
         $result = $conect->prepare($cadastro);
-        $result->bindParam(':nome', $nome, PDO::PARAM_STR);
-        $result->bindParam(':email', $email, PDO::PARAM_STR);
-        $result->bindParam(':senha', $senha, PDO::PARAM_STR);
-        $result->bindParam(':foto', $novoNome, PDO::PARAM_STR);
+        $result->bindParam(':name_user', $name_user, PDO::PARAM_STR);
+        $result->bindParam(':email_user', $email_user, PDO::PARAM_STR);
+        $result->bindParam(':password_user', $password_user, PDO::PARAM_STR);
+        $result->bindParam(':picture', $novoNomeAvatar, PDO::PARAM_STR);
+        $result->bindParam(':class', $class, PDO::PARAM_STR);
+        $result->bindParam(':booking_day', $booking_day, PDO::PARAM_STR);
+        $result->bindParam(':return_day', $return_day, PDO::PARAM_STR);
         $result->execute();
         $contar = $result->rowCount();
 
@@ -101,21 +107,21 @@ if (isset($_POST['botao'])) {
 <div>
   <div>
     <div>
-      <p>Cadastre todos os dados para ter acesso a agenda</p>
+      <p>Cadastre todos os dados para ter acesso ao sistema</p>
 
       <form action="" method="post">
       <div>
         <label>Foto do usuário</label>
         <div>
             <div>
-            <input type="file" name="foto" id="foto">
+            <input type="file" name="picture" id="picture">
             <label>Arquivo de imagem</label>
             </div>
             
         </div>
         </div>
         <div class="input-group mb-3">
-          <input type="text" name="nome" class="form-control" placeholder="Digite seu Nome..." required>
+          <input type="text" name="name_user" class="form-control" placeholder="Digite seu Nome..." required>
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-envelope"></span>
@@ -123,7 +129,7 @@ if (isset($_POST['botao'])) {
           </div>
         </div>
         <div class="input-group mb-3">
-          <input type="email" name="email" class="form-control" placeholder="Digite seu E-mail..." required>
+          <input type="email" name="email_user" class="form-control" placeholder="Digite seu E-mail..." required>
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-envelope"></span>
@@ -132,10 +138,39 @@ if (isset($_POST['botao'])) {
         </div>
         
         <div class="input-group mb-3">
-          <input type="password" name="senha" class="form-control" placeholder="Digite sua Senha..." required>
+          <input type="password" name="password_user" class="form-control" placeholder="Digite sua Senha..." required>
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-lock"></span>
+            </div>
+          </div>
+        </div>
+        
+        <div class="input-group mb-3">
+          <input type="text" name="class" class="form-control" placeholder="Digite sua Classe/Turma..." required>
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-envelope"></span>
+            </div>
+          </div>
+        </div>
+
+        <div class="input-group mb-3">
+          <label>Booking Day...</label>
+          <input type="date" name="booking_day" class="form-control" required>
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-envelope"></span>
+            </div>
+          </div>
+        </div>
+
+        <div class="input-group mb-3">
+          <label>Return Day...</label>
+          <input type="date" name="return_day" class="form-control" required>
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-envelope"></span>
             </div>
           </div>
         </div>
@@ -145,7 +180,7 @@ if (isset($_POST['botao'])) {
           </div>
           <!-- /.col -->
           <div class="col-12" style="margin-bottom: 25px">
-            <button type="submit" name="botao" class="btn btn-primary btn-block">Finalizar Cadastro</button>
+            <button type="submit" name="cadastrar" class="btn btn-primary btn-block">Finalizar Cadastro</button>
           </div>
           <!-- /.col -->
         </div>

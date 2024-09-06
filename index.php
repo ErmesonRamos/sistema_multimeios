@@ -19,11 +19,11 @@ if (isset($_GET['acao'])) {
 
 // Processar o formulário de login
 if (isset($_POST['login'])) {
-    $login = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
-    $senha = filter_input(INPUT_POST, 'senha', FILTER_DEFAULT);
+    $login = filter_input(INPUT_POST, 'email_user', FILTER_SANITIZE_EMAIL);
+    $senha = filter_input(INPUT_POST, 'password_user', FILTER_DEFAULT);
 
     if ($login && $senha) {
-        $select = "SELECT * FROM tb_student WHERE email_student = :emailLogin";
+        $select = "SELECT * FROM tb_user WHERE email_user = :emailLogin";
 
         try {
             $resultLogin = $conect->prepare($select);
@@ -35,10 +35,10 @@ if (isset($_POST['login'])) {
                 $user = $resultLogin->fetch(PDO::FETCH_ASSOC);
 
                 // Verifica a senha
-                if (password_verify($senha, $user['password_student'])) {
+                if (password_verify($senha, $user['password_user'])) {
                     // Criar sessão
                     $_SESSION['loginUser'] = $login;
-                    $_SESSION['senhaUser'] = $user['registron_student'];
+                    $_SESSION['senhaUser'] = $user['registron_user'];
 
                     echo '<div class="alert alert-success"><button type="button" class="close" data-dismiss="alert">×</button>
                     <strong>Logado com sucesso!</strong> Você será redirecionado para a agenda :)</div>';
@@ -108,7 +108,7 @@ if (isset($_POST['login'])) {
 ?>
       <form action="" method="post">
         <div class="input-group mb-3">
-          <input type="email" name="email" class="form-control" placeholder="Digite seu E-mail...">
+          <input type="email" name="email_user" class="form-control" placeholder="Digite seu E-mail...">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-envelope"></span>
@@ -116,7 +116,7 @@ if (isset($_POST['login'])) {
           </div>
         </div>
         <div class="input-group mb-3">
-          <input type="password" name="senha" class="form-control" placeholder="Digite sua Senha...">
+          <input type="password" name="password_user" class="form-control" placeholder="Digite sua Senha...">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-lock"></span>
