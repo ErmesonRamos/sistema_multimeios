@@ -5,7 +5,7 @@ CREATE TABLE tb_user (
 	registron_user INTEGER PRIMARY KEY, 
 	name_user VARCHAR(40) NOT NULL, 
     email_user VARCHAR(40) NOT NULL,
-    password_user VARCHAR(40) NOT NULL,
+    password_user VARCHAR(255) NOT NULL,
 	class VARCHAR(45), 
 	booking_day DATE NOT NULL, 
 	return_day DATE NOT NULL, 
