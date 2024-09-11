@@ -9,7 +9,6 @@ CREATE TABLE tb_user (
 	class VARCHAR(45), 
 	booking_day DATE NOT NULL, 
 	return_day DATE NOT NULL, 
-	picture BLOB
 );
 
 CREATE TABLE tb_book (  

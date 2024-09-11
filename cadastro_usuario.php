@@ -1,98 +1,130 @@
 <?php
-include_once("config/conexao.php");
+include('config/conexao.php'); // Inclui o arquivo de conexão com o banco de dados
 
-if (isset($_POST['cadastrar'])) {
-    $name_user = $_POST['name_user'];
-    $email_user = $_POST['email_user'];
-    $password_user = password_hash($_POST['password_user'], PASSWORD_DEFAULT);
+// Verifica se o formulário foi enviado
+if (isset($_POST['botao'])) {
+    // Recebe os dados do formulário
+    $nome = $_POST['nome'];
+    $email = $_POST['email'];
+    $senha = password_hash($_POST['senha'], PASSWORD_DEFAULT); // Usando hash seguro para a senha
     $class = $_POST['class'];
     $booking_day = $_POST['booking_day'];
     $return_day = $_POST['return_day'];
 
-    if (!empty($_FILES['foto_user']['name'])) {
-        $formatosPermitidos = array("png", "jpg", "jpeg", "gif");
-        $extensao = pathinfo($_FILES['foto_user']['name'], PATHINFO_EXTENSION);
-
-        if (in_array(strtolower($extensao), $formatosPermitidos)) {
-            $pasta = realpath(__DIR__ . "img/avatares/");
-            $temporario = $_FILES['foto_user']['tmp_name'];
-            $novoNomeAvatar = uniqid() . ".$extensao";
-            $destino = $pasta . DIRECTORY_SEPARATOR . $novoNomeAvatar;
-
-            // Verifique se o diretório existe e é gravável
-            if (!is_dir($pasta) || !is_writable($pasta)) {
-                echo "Diretório de upload não encontrado ou não é gravável.";
-                exit();
-            }
-
-            // Verifique se o arquivo pode ser movido
-            if (move_uploaded_file($temporario, $destino)) {
-                echo "Imagem enviada com sucesso!";
-            } else {
-                $error = error_get_last();
-                echo 'Não foi possível fazer o upload do arquivo. Erro: ' . $error['message'];
-                exit();
-            }
-        } else {
-            echo 'Formato de arquivo não permitido.';
-            exit();
-        }
-    } else {
-        $novoNomeAvatar = 'avatar_padrao.png';
-    }
-
-    $new_user = "INSERT INTO tb_user (name_user, email_user, password_user, class, booking_day, return_day, picture) VALUES (:name_user, :email_user, :password_user, :class, :booking_day, :return_day, :foto_user)";
+    // Prepara a consulta SQL para inserção dos dados do usuário
+    $cadastro = "INSERT INTO tb_user (name_user, email_user, password_user, class, booking_day, return_day) VALUES (:nome, :email, :senha, :class, :booking_day, :return_day)";
 
     try {
-        $result = $conect->prepare($new_user);
-        $result->bindParam(':name_user', $name_user, PDO::PARAM_STR);
-        $result->bindParam(':email_user', $email_user, PDO::PARAM_STR);
-        $result->bindParam(':password_user', $password_user, PDO::PARAM_STR);
+        $result = $conect->prepare($cadastro);
+        $result->bindParam(':nome', $nome, PDO::PARAM_STR);
+        $result->bindParam(':email', $email, PDO::PARAM_STR);
+        $result->bindParam(':senha', $senha, PDO::PARAM_STR);
         $result->bindParam(':class', $class, PDO::PARAM_STR);
         $result->bindParam(':booking_day', $booking_day, PDO::PARAM_STR);
         $result->bindParam(':return_day', $return_day, PDO::PARAM_STR);
-        $result->bindParam(':foto_user', $novoNomeAvatar, PDO::PARAM_STR);
         $result->execute();
         $contar = $result->rowCount();
-    
+
         if ($contar > 0) {
-            echo "Livro adicionado com sucesso!";
+            echo '<div class="container">
+                    <div class="alert alert-success alert-dismissible">
+                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                        <h5><i class="icon fas fa-check"></i> OK!</h5>
+                        Dados inseridos com sucesso !!!
+                    </div>
+                </div>';
         } else {
-            echo "Nenhum livro foi inserido. Verifique se os dados foram corretamente enviados.";
+            echo '<div class="container">
+                    <div class="alert alert-danger alert-dismissible">
+                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                        <h5><i class="icon fas fa-check"></i> Erro!</h5>
+                        Dados não inseridos !!!
+                    </div>
+                </div>';
         }
     } catch (PDOException $e) {
-        error_log("Erro de PDO: " . $e->getMessage());
-        echo "Ocorreu um erro ao tentar inserir os dados: " . $e->getMessage();
+        // Loga a mensagem de erro em vez de exibi-la para o usuário
+        error_log("ERRO DE PDO: " . $e->getMessage());
+        echo '<div class="container">
+                <div class="alert alert-danger alert-dismissible">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                    <h5><i class="icon fas fa-exclamation-triangle"></i> Erro!</h5>
+                    Ocorreu um erro ao tentar inserir os dados.
+                </div>
+            </div>';
     }
 }
-
 ?>
+
 <!DOCTYPE html>
-<html lang="pt">
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet">
-  <title>Cadastro de Usuário</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro</title>
 </head>
 <body>
-  <form action="cadastro_usuario.php" method="post" enctype="multipart/form-data">
-        <label for="name_user">Username:</label>
-        <input type="text" name="name_user" id="name_user"><br>
-        <label for="email_user">Email:</label>
-        <input type="email" name="email_user" id="email_user"><br>
-        <label for="password_user">Senha:</label>
-        <input type="password" name="password_user" id="password_user"><br>
-        <label for="class">Classe:</label>
-        <input type="text" name="class" id="class"><br>
-        <label for="booking_day">Booking_day:</label>
-        <input type="date" name="booking_day" id="booking_day"><br>
-        <label for="return_day">Return_day:</label>
-        <input type="date" name="return_day" id="return_day"><br>
-        <label for="foto_user">Adicionar foto:</label><br>
-        <input type="file" name="foto_user" id="foto_user"><br>
-        <input type="submit" name="cadastrar" value="Cadastrar-se">
-    </form>
+<form action="cadastro_usuario.php" method="post">
+      <div>
+        <div class="input-group mb-3">
+          <input type="text" name="nome" class="form-control" placeholder="Digite seu Nome..." required>
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-envelope"></span>
+            </div>
+          </div>
+        </div>
+        <div class="input-group mb-3">
+          <input type="email" name="email" class="form-control" placeholder="Digite seu E-mail..." required>
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-envelope"></span>
+            </div>
+          </div>
+        </div>
+        <div class="input-group mb-3">
+          <input type="password" name="senha" class="form-control" placeholder="Digite sua Senha..." required>
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-lock"></span>
+            </div>
+          </div>
+        </div>
+        <div class="input-group mb-3">
+          <input type="text" name="class" class="form-control" placeholder="Digite sua Classe/Turma..." required>
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-envelope"></span>
+            </div>
+          </div>
+        </div>
+        <div class="input-group mb-3">
+          <label>Booking Day...</label>
+          <input type="date" name="booking_day" class="form-control" required>
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-envelope"></span>
+            </div>
+          </div>
+        </div>
+        <div class="input-group mb-3">
+          <label>Return Day...</label>
+          <input type="date" name="return_day" class="form-control" required>
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-envelope"></span>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-8">
+          </div>
+          <!-- /.col -->
+          <div class="col-12" style="margin-bottom: 25px">
+            <button type="submit" name="botao" class="btn btn-primary btn-block">Finalizar Cadastro</button>
+          </div>
+          <!-- /.col -->
+        </div>
+      </form>
 </body>
 </html>
-  
