@@ -20,6 +20,7 @@ main {
 }
 
 .conteiner h1 {
+  padding: 30px;
   text-align: center;
   color: #32CD32; /* Verde limão */
 }
