@@ -13,27 +13,27 @@
       <h1>Insira livros aqui</h1>
       <div class="book-register">
         <form action="">
-          <label for="ititle">Titulo do livro:</label>
+          <label for="ititle">Titulo do livro</label>
           <br>
           <input type="text" name="ititle" id="ititle">
           <br>
-          <label for="igenero">Genéro:</label>
+          <label for="igenero">Genero</label>
           <br>
           <input type="text" name="igenero" id="igenero">
           <br>
-          <label for="iautor">Autor:</label>
+          <label for="iautor">Autor</label>
           <br>
           <input type="text" name="iautor" id="iautor">
           <br>
-          <label for="ibook-day">Dia da reserva:</label>
+          <label for="ibook-day">Dia da reserva</label>
           <br>
           <input type="date" name="ibook-day" id="ibook-day">
           <br>
-          <label for="ireturn_day">Dia do retorno da reserva:</label>
+          <label for="ireturn_day">Dia do retorno da reserva</label>
           <br>
           <input type="date" name="ireturn_day" id="ireturn_day">
           <br>
-          <label for="iregistron_studant">Matrícula do aluno:</label>
+          <label for="iregistron_studant">Matrícula do aluno</label>
           <br>
           <input type="number" name="iregistron_studant" id="iregistron_studant">
           <br>
