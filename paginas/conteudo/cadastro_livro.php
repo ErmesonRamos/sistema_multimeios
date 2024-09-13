@@ -7,7 +7,9 @@
   <title>Cadastro de Livros</title>
 </head>
 <body>
-  <?php include '../../includes/header.php' ?>
+  <header>
+    <?php include '../../includes/header.php' ?>
+  </header>
   <main>
     <div class="container">
       <h1>Principais Livros Lidos:</h1>
@@ -60,7 +62,9 @@
         </div>
     </div>
   </main>
-
+  <footer>
+    <?php include '../../includes/footer.php' ?>
+  </footer>
 </body>
 </html>
   
