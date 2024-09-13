@@ -1,0 +1,109 @@
+/* Estilos Gerais */
+body {
+    font-family: 'Source Sans Pro', sans-serif;
+    color: #4F4F4F; /* Cor de texto padrão */
+    background-color: #f4f6f9; /* Cor de fundo padrão */
+    margin: 0;
+    padding: 0;
+}
+
+/* Navbar */
+.main-header {
+    background-color: #003366; /* Azul escuro */
+    border-bottom: 1px solid #004080; /* Azul um pouco mais claro para contraste */
+    padding: 0.8rem 1rem;
+}
+
+.main-header .navbar-nav {
+    display: flex;
+    align-items: center;
+}
+
+.main-header .navbar-nav .nav-link {
+    color: #FFFFFF; /* Texto branco */
+}
+
+.main-header .navbar-nav .nav-link:hover {
+    color: #cce0ff; /* Azul claro ao passar o mouse */
+}
+
+.main-header .form-inline .form-control-navbar {
+    border-radius: 0.25rem;
+    border: 1px solid #00509e; /* Azul mais claro */
+    background-color: #003366; /* Azul escuro */
+    color: #FFFFFF; /* Texto branco */
+}
+
+.main-header .btn-navbar {
+    background-color: #00509e; /* Azul mais claro */
+    border: none;
+    color: #FFFFFF; /* Texto branco */
+}
+
+.main-header .btn-navbar:hover {
+    background-color: #003366; /* Azul escuro */
+}
+
+/* Sidebar */
+.main-sidebar {
+    background-color: #003366; /* Azul escuro */
+    color: #FFFFFF; /* Texto branco */
+}
+
+.main-sidebar .brand-link {
+    background-color: #003366; /* Azul escuro */
+    color: #FFFFFF; /* Texto branco */
+    padding: 1rem;
+    display: flex;
+    align-items: center;
+}
+
+.main-sidebar .brand-image {
+    width: 30px;
+    height: 30px;
+    margin-right: 10px;
+}
+
+.main-sidebar .brand-text {
+    font-family: 'Source Sans Pro', sans-serif;
+    font-size: 1.25rem;
+    font-weight: 700;
+}
+
+.main-sidebar .nav-link {
+    color: #FFFFFF; /* Texto branco */
+}
+
+.main-sidebar .nav-link.active {
+    background-color: #004080; /* Azul um pouco mais claro */
+    color: #FFFFFF; /* Texto branco */
+}
+
+.main-sidebar .nav-link:hover {
+    background-color: #004080; /* Azul um pouco mais claro */
+}
+
+.main-sidebar .nav-item.has-treeview .nav-treeview {
+    display: none;
+}
+
+.main-sidebar .nav-item.has-treeview.menu-open .nav-treeview {
+    display: block;
+}
+
+.main-sidebar .nav-treeview .nav-link {
+    background-color: #002244; /* Azul ainda mais escuro */
+    color: #FFFFFF; /* Texto branco */
+}
+
+.main-sidebar .nav-treeview .nav-link:hover {
+    background-color: #003366; /* Azul escuro */
+}
+
+.user-panel {
+    border-bottom: 1px solid #004080; /* Azul um pouco mais claro */
+}
+
+.user-panel .info a {
+    color: #FFFFFF; /* Texto branco */
+}
