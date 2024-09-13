@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="estilos/cadastro_livro.css">
+  <link rel="stylesheet" href="estilos/catalogo_livros.css">
   <title>Catálogo de Livros</title>
 </head>
 <body >
