@@ -28,7 +28,7 @@
     <div class="card-body login-card-body">
       <p class="login-box-msg">Cadastre todos os dados para ter acesso a agenda</p>
 
-      <form action="" method="post" enctype="multipart/form-data">
+      <form action="cad_user.php" method="post" enctype="multipart/form-data">
      
         <div class="input-group mb-3">
           <input type="text" name="nome" class="form-control" placeholder="Digite seu Nome..." required>
