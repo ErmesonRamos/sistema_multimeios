@@ -53,7 +53,6 @@ CREATE TABLE `tb_user` (
   `email_user` varchar(40) NOT NULL,
   `password_user` varchar(40) NOT NULL,
   `class` varchar(45) DEFAULT NULL,
-  `picture` blob,
   PRIMARY KEY (`registron_user`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -76,4 +75,7 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-09-17  8:19:30
+-- Dump completed on 2024-09-17  9:10:37
+
+INSERT INTO `new_sistema_multimeios`.`tb_user` (`registron_user`, `name_user`, `email_user`, `password_user`, `class`)
+VALUES ('123', 'teste1', 'teste1@sos.com', '123', 'inf');

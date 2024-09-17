@@ -1,99 +1,33 @@
 <?php
-include('../config/conexao.php'); // Inclui o arquivo de conexão com o banco de dados
+include('config/conexao.php');
 
-// Verifica se o formulário foi enviado
-if (isset($_POST['Registrar'])) {
-    // Recebe os dados do formulário
-    $name_user = $_POST['nome'];
-    $email_user = $_POST['email'];
-    $password_user = password_hash($_POST['senha'], PASSWORD_DEFAULT); // Usando hash seguro para a senha
-    $matricula = $_POST['matricula'];
-    $classe = $_POST['classe'];
+if (isset($_POST['register'])) {
+    $name = filter_input(INPUT_POST, 'name', FILTER_SANITIZE_STRING);
+    $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
+    $password = filter_input(INPUT_POST, 'password', FILTER_DEFAULT);
+    $class = filter_input(INPUT_POST, 'class', FILTER_SANITIZE_STRING);
 
-    // Verifica se foi enviado algum arquivo de foto
-    if (!empty($_FILES['foto']['name'])) {
-        $formatosPermitidos = array("png", "jpg", "jpeg", "gif"); // Formatos permitidos
-        $extensao = pathinfo($_FILES['foto']['name'], PATHINFO_EXTENSION); // Obtém a extensão do arquivo
+    if ($name && $email && $password) {
+        $passwordHash = password_hash($password, PASSWORD_DEFAULT);
 
-        // Verifica se a extensão do arquivo está nos formatos permitidos
-        if (in_array(strtolower($extensao), $formatosPermitidos)) {
-            $pasta = "img/avatares/"; // Define o diretório para upload
-            $temporario = $_FILES['foto']['tmp_name']; // Caminho temporário do arquivo
-            $novoNomeAvatar = uniqid() . ".$extensao"; // Gera um nome único para o arquivo
+        $sql = "INSERT INTO tb_user (name_user, email_user, password_user, class) VALUES (:name, :email, :password, :class)";
+        $stmt = $conect->prepare($sql);
+        $stmt->bindParam(':name', $name);
+        $stmt->bindParam(':email', $email);
+        $stmt->bindParam(':password', $passwordHash);
+        $stmt->bindParam(':class', $class);
 
-            // Move o arquivo para o diretório de imagens
-            if (move_uploaded_file($temporario, $pasta . $novoNomeAvatar)) {
-                // Sucesso no upload da imagem
-            } else {
-                echo '<div class="container">
-                        <div class="alert alert-danger alert-dismissible">
-                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                            <h5><i class="icon fas fa-exclamation-triangle"></i> Erro!</h5>
-                            Não foi possível fazer o upload do arquivo.
-                        </div>
-                    </div>';
-                exit(); // Termina a execução do script após o erro
-            }
-        } else {
-            echo '<div class="container">
-                    <div class="alert alert-danger alert-dismissible">
-                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                        <h5><i class="icon fas fa-exclamation-triangle"></i> Formato Inválido!</h5>
-                        Formato de arquivo não permitido.
-                    </div>
-                </div>';
-            exit(); // Termina a execução do script após o erro
+        try {
+            $stmt->execute();
+            echo '<div class="alert alert-success">Cadastro realizado com sucesso!</div>';
+        } catch (PDOException $e) {
+            echo '<div class="alert alert-danger">Erro ao cadastrar: ' . $e->getMessage() . '</div>';
         }
     } else {
-        // Define um avatar padrão caso não seja enviado nenhum arquivo de foto
-        $novoNomeAvatar = 'avatar_padrao.png'; // Nome do arquivo de avatar padrão
-    }
-
-    // Prepara a consulta SQL para inserção dos dados do usuário
-    $cadastro = "INSERT INTO tb_user (registron_user, name_user, email_user, password_user, class, picture) VALUES (:matricula, :nome, :email, :senha, :classe, :foto)";
-
-    try {
-        $result = $conect->prepare($cadastro);
-        $result->bindParam(':matricula', $matricula, PDO::PARAM_STR);
-        $result->bindParam(':nome', $nome, PDO::PARAM_STR);
-        $result->bindParam(':email', $email, PDO::PARAM_STR);
-        $result->bindParam(':senha', $senha, PDO::PARAM_STR);
-        $result->bindParam(':classe', $classe, PDO::PARAM_STR);
-        $result->bindParam(':foto', $novoNomeAvatar, PDO::PARAM_STR);
-        $result->execute();
-        $contar = $result->rowCount();
-
-        if ($contar > 0) {
-            echo '<div class="container">
-                    <div class="alert alert-success alert-dismissible">
-                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                        <h5><i class="icon fas fa-check"></i> OK!</h5>
-                        Dados inseridos com sucesso !!!
-                    </div>
-                </div>';
-        } else {
-            echo '<div class="container">
-                    <div class="alert alert-danger alert-dismissible">
-                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                        <h5><i class="icon fas fa-check"></i> Erro!</h5>
-                        Dados não inseridos !!!
-                    </div>
-                </div>';
-        }
-    } catch (PDOException $e) {
-        // Loga a mensagem de erro em vez de exibi-la para o usuário
-        error_log("ERRO DE PDO: " . $e->getMessage());
-        echo '<div class="container">
-                <div class="alert alert-danger alert-dismissible">
-                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                    <h5><i class="icon fas fa-exclamation-triangle"></i> Erro!</h5>
-                    Ocorreu um erro ao tentar inserir os dados.
-                </div>
-            </div>';
+        echo '<div class="alert alert-danger">Todos os campos são obrigatórios!</div>';
     }
 }
 ?>
-
 
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -122,9 +56,9 @@ if (isset($_POST['Registrar'])) {
             <input type="password" name="senha" placeholder="Senha" required>
             <input type="text" name="matricula" placeholder="Matricula" required>
             <input type="text" name="classe" placeholder="Turma" required>
-            <a href="login.html">Voltar para pagína de entrada</a>
+            <a href="login.php">Voltar para página de entrada</a>
             <br>
-            <input type="submit" value="Registrar">
+            <input type="submit" name="Registrar" value="Registrar">
           </form>
         </div>
       </div>

@@ -1,18 +1,15 @@
 <?php
-if (!defined('DB_CONFIG')) {
-    define('DB_CONFIG', [
-        'host' => 'localhost',
-        'dbname' => 'new_sistema_multimeios',
-        'user' => 'root',
-        'pass' => 'bdjmf'
-    ]);
-}
+// config/conexao.php
 
-// Criando a conexão com o banco de dados usando PDO
+$host = 'localhost'; // Host do banco de dados
+$dbname = 'new_sistema_multimeios'; // Nome do banco de dados
+$user = 'root'; // Usuário do banco de dados
+$password = 'bdjmf'; // Senha do banco de dados
+
 try {
-    $dsn = 'mysql:host=' . DB_CONFIG['host'] . ';dbname=' . DB_CONFIG['dbname'];
-    $conect = new PDO($dsn, DB_CONFIG['user'], DB_CONFIG['pass']);
+    $conect = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8mb4", $user, $password);
     $conect->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 } catch (PDOException $e) {
-    echo "<strong>ERRO DE PDO = </strong>" . $e->getMessage();
+    die("Erro na conexão: " . $e->getMessage());
 }
+?>
