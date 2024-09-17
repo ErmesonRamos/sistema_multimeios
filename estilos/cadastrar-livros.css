@@ -1,0 +1,81 @@
+@charset "UTF-8";
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+header {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center; /* Mantém h1 e p centralizados verticalmente */
+  background-image: url('../img/fdc8f005be5c5f6254622950ce0248b1\ 1.png');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  font-family: "Montserrat", sans-serif;
+  color: white;
+  padding: 20px; 
+  position: relative;
+}
+
+header h1 {
+  padding: 10px;
+  font-size: 32px;
+  font-weight: 800;
+  line-height: 39.01px;
+  text-align: center; 
+}
+
+header p {
+  font-weight: 500;
+  font-size: 15px;
+  line-height: 18.29px;
+  text-align: center; 
+}
+
+nav {
+  position: absolute; 
+  bottom: 0px; 
+  left: 20px; 
+}
+
+nav ul {
+  list-style-type: none; 
+  padding: 0;
+  margin: 0;
+}
+
+nav ul li {
+  margin: 0 10px; 
+  display: inline-block; 
+}
+
+nav ul li a {
+  color: white; 
+  text-decoration: none; 
+  font-weight: 700;
+  font-size: 16px;
+  padding: 5px 10px; 
+  transition: background-color 0.3s ease, color 0.3s ease; 
+  border-radius: 10px; 
+}
+
+nav ul li a:hover {
+  background-color: #98c8a3; 
+  color: white; 
+}
+
+main {
+  margin-top: 50px;
+  margin-bottom: 50px;
+}
+
+
+
+

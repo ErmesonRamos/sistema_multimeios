@@ -89,10 +89,12 @@
 }
 
 .container .container-conteudo .container-form .container-conteudo-form form h2 {
-  line-height: 24.38px;
-  font-size: 20px;
-  font-weight: 500;
-  text-align: center;
+ width: 154px;
+ height: 24px;
+ font-weight: 500;
+ font-size: 20px;
+ line-height: 24.38px;
+ text-align: center;
 }
 
 .container .container-conteudo .container-form .container-conteudo-form form input[type="text"],
@@ -104,25 +106,8 @@
   border-radius: 20px;
 }
 
-.container .container-conteudo .container-form .container-conteudo-form form input[type="checkbox"] {
-  display: inline;
-  width: 26px;
-  height: 24px;
-}
 
-.container .container-conteudo .container-form .container-conteudo-form .opcoes {
-  display: flex;
-}
-
-.container .container-conteudo .container-form .container-conteudo-form .opcoes p {
-  width: 59px;
-  height: 18px;
-  font-weight: 300;
-  font-size: 9px;
-  line-height: 10.97px;
-}
-
-.container .container-conteudo .container-form .container-conteudo-form .opcoes a {
+.container .container-conteudo .container-form .container-conteudo-form a {
   width: 96px;
   height: 22px;
   line-height: 10.97px;
@@ -137,7 +122,7 @@
 .container .container-conteudo .container-form .container-conteudo-form form input[type="submit"] {
   width: 200px;
   height: 32px;
-  background-image: linear-gradient(to right, #7CD65B, #00AAAD);
+  background-color: #7CD65B;
   color: white;
   line-height: 19.5px;
   font-weight: 600;
