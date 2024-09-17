@@ -1,32 +1,49 @@
 <?php
-include('config/conexao.php');
+include('../config/conexao.php');
 
 if (isset($_POST['register'])) {
-    $name = filter_input(INPUT_POST, 'name', FILTER_SANITIZE_STRING);
+    $name = filter_input(INPUT_POST, 'nome', FILTER_SANITIZE_STRING);
     $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
-    $password = filter_input(INPUT_POST, 'password', FILTER_DEFAULT);
-    $class = filter_input(INPUT_POST, 'class', FILTER_SANITIZE_STRING);
+    $password = password_hash($_POST['senha'], PASSWORD_DEFAULT);
+    $class = filter_input(INPUT_POST, 'classe', FILTER_SANITIZE_STRING);
 
-    if ($name && $email && $password) {
-        $passwordHash = password_hash($password, PASSWORD_DEFAULT);
+    
 
-        $sql = "INSERT INTO tb_user (name_user, email_user, password_user, class) VALUES (:name, :email, :password, :class)";
-        $stmt = $conect->prepare($sql);
-        $stmt->bindParam(':name', $name);
-        $stmt->bindParam(':email', $email);
-        $stmt->bindParam(':password', $passwordHash);
-        $stmt->bindParam(':class', $class);
+    $sql = "INSERT INTO tb_user (name_user, email_user, password_user, class) VALUES (:name_user, :email_user, :password_user, :class_user)";
 
         try {
-            $stmt->execute();
-            echo '<div class="alert alert-success">Cadastro realizado com sucesso!</div>';
+
+        
+        $stmt = $conect->prepare($sql);
+        $stmt->bindParam(':name_user', $name);
+        $stmt->bindParam(':email_user', $email);
+        $stmt->bindParam(':password_user', $password);
+        $stmt->bindParam(':class_user', $class);
+        $stmt->execute();
+
+        $contar = $stmt->rowCount();
+        if ($contar > 0) {
+          echo '<div class="container">
+                  <div class="alert alert-success alert-dismissible">
+                      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                      <h5><i class="icon fas fa-check"></i> OK!</h5>
+                      Dados inseridos com sucesso !!!
+                  </div>
+              </div>';
+      } else {
+          echo '<div class="container">
+                  <div class="alert alert-danger alert-dismissible">
+                      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                      <h5><i class="icon fas fa-check"></i> Erro!</h5>
+                      Dados não inseridos !!!
+                  </div>
+              </div>';
+      }
         } catch (PDOException $e) {
             echo '<div class="alert alert-danger">Erro ao cadastrar: ' . $e->getMessage() . '</div>';
         }
-    } else {
-        echo '<div class="alert alert-danger">Todos os campos são obrigatórios!</div>';
     }
-}
+
 ?>
 
 <!DOCTYPE html>
@@ -54,11 +71,11 @@ if (isset($_POST['register'])) {
             <input type="text" name="nome" placeholder="Username" required>
             <input type="email" name="email" placeholder="E-mail" required>
             <input type="password" name="senha" placeholder="Senha" required>
-            <input type="text" name="matricula" placeholder="Matricula" required>
+            <!-- <input type="text" name="matricula" placeholder="Matricula" required> -->
             <input type="text" name="classe" placeholder="Turma" required>
             <a href="login.php">Voltar para página de entrada</a>
             <br>
-            <input type="submit" name="Registrar" value="Registrar">
+            <input type="submit" name="register" value="Registrar">
           </form>
         </div>
       </div>
