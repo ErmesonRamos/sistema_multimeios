@@ -1,3 +1,34 @@
+<?php
+include_once("../config/conexao.php");
+
+
+if (isset($_POST['Cadastrar'])) {
+    $titulo_livro = $_POST['ititulo-livro'];
+    $autor = $_POST['iautor'];
+    $genero_livro = $_POST['genero'];
+    
+    $new_book = "INSERT INTO tb_book (title, gender_book, author_book) VALUES (:ititulo-livro, :genero, :iautor)";
+
+    try {
+        $result = $conect->prepare($new_book);
+        $result->bindParam(':ititulo-livro', $titulo_livro, PDO::PARAM_STR);
+        $result->bindParam(':genero', $genero_livro, PDO::PARAM_STR);
+        $result->bindParam(':iautor', $autor, PDO::PARAM_STR);
+        $result->execute();
+        $contar = $result->rowCount();
+    
+        if ($contar > 0) {
+            echo "Livro adicionado com sucesso!";
+        } else {
+            echo "Nenhum livro foi inserido. Verifique se os dados foram corretamente enviados.";
+        }
+    } catch (PDOException $e) {
+        error_log("Erro de PDO: " . $e->getMessage());
+        echo "Ocorreu um erro ao tentar inserir os dados: " . $e->getMessage();
+    }
+}
+?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
