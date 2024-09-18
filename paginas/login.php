@@ -1,23 +1,4 @@
 <?php
-session_start();
-
-include_once('../config/conexao.php');
-                   
-// Exibir mensagens com base na ação
-if (isset($_GET['acao'])) {
-    $acao = $_GET['acao'];
-    if ($acao == 'negado') {
-        echo '<div class="alert alert-danger"><button type="button" class="close" data-dismiss="alert">×</button>
-        <strong>Erro ao Acessar o sistema!</strong> Efetue o login ;(</div>';
-       
-    } elseif ($acao == 'sair') {
-        echo '<div class="alert alert-warning"><button type="button" class="close" data-dismiss="alert">×</button>
-        <strong>Você acabou de sair do Sistema Multimeios!</strong> :(</div>';
-       
-    }
-}
-
-// Processar o formulário de login
 if (isset($_POST['login'])) {
     $login = filter_input(INPUT_POST, 'emailLogin', FILTER_SANITIZE_EMAIL);
     $senha = filter_input(INPUT_POST, 'senhaLogin', FILTER_DEFAULT);
@@ -35,38 +16,25 @@ if (isset($_POST['login'])) {
                 $user = $resultLogin->fetch(PDO::FETCH_ASSOC);
 
                 // Verifica a senha
-                if (password_verify($senha, $user['senhaLogin'])) {
-                    // Criar sessão
+                if (password_verify($senha, $user['senha_user'])) { // Ajuste aqui se necessário
                     $_SESSION['login'] = $login;
                     $_SESSION['senhaLogin'] = $user['registron_user'];
 
-                    echo '<div class="alert alert-success"><button type="button" class="close" data-dismiss="alert">×</button>
-                    <strong>Logado com sucesso!</strong> Você será redirecionado para a agenda :)</div>';
-
-                    header("Refresh: 5; url=paginas/home.php?acao=bemvindo");
+                    echo '<div class="alert alert-success">Logado com sucesso!</div>';
+                    header("Location: paginas/home.php?acao=bemvindo");
+                    exit();
                 } else {
-                    echo '<div class="alert alert-danger">
-                    <button type="button" class="close" data-dismiss="alert">×</button>
-                    <strong>Erro!</strong> Senha incorreta, tente novamente.</div>';
-                    header("Refresh: 7; url=login.php");
+                    echo '<div class="alert alert-danger">Senha incorreta, tente novamente.</div>';
                 }
             } else {
-                echo '<div class="alert alert-danger">
-                <button type="button" class="close" data-dismiss="alert">×</button>
-                <strong>Erro!</strong> E-mail não encontrado, verifique seu login ou faça o cadastro.</div>';
-                header("Refresh: 7; url=login.php");
+                echo '<div class="alert alert-danger">E-mail não encontrado, verifique seu login ou faça o cadastro.</div>';
             }
         } catch (PDOException $e) {
-            // Log the error instead of displaying it to the user
             error_log("ERRO DE LOGIN DO PDO: " . $e->getMessage());
-            echo '<div class="alert alert-danger">
-            <button type="button" class="close" data-dismiss="alert">×</button>
-            <strong>Erro!</strong> Ocorreu um erro ao tentar fazer login. Por favor, tente novamente mais tarde.</div>';
+            echo '<div class="alert alert-danger">Ocorreu um erro ao tentar fazer login.</div>';
         }
     } else {
-        echo '<div class="alert alert-danger">
-        <button type="button" class="close" data-dismiss="alert">×</button>
-        <strong>Erro!</strong> Todos os campos são obrigatórios.</div>';
+        echo '<div class="alert alert-danger">Todos os campos são obrigatórios.</div>';
     }
 }
 ?>

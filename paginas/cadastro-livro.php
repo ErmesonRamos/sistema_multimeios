@@ -3,15 +3,15 @@ include_once("../config/conexao.php");
 
 
 if (isset($_POST['Cadastrar'])) {
-    $titulo_livro = $_POST['ititulo-livro'];
+    $titulo_livro = $_POST['ititulo_livro'];
     $autor = $_POST['iautor'];
     $genero_livro = $_POST['genero'];
     
-    $new_book = "INSERT INTO tb_book (title, gender_book, author_book) VALUES (:ititulo-livro, :genero, :iautor)";
+    $new_book = "INSERT INTO tb_book (title, gender_book, author_book) VALUES (:ititulo_livro, :genero, :iautor)";
 
     try {
         $result = $conect->prepare($new_book);
-        $result->bindParam(':ititulo-livro', $titulo_livro, PDO::PARAM_STR);
+        $result->bindParam(':ititulo_livro', $titulo_livro, PDO::PARAM_STR);
         $result->bindParam(':genero', $genero_livro, PDO::PARAM_STR);
         $result->bindParam(':iautor', $autor, PDO::PARAM_STR);
         $result->execute();
@@ -55,8 +55,8 @@ if (isset($_POST['Cadastrar'])) {
       <div class="conteiner-form">
         <h2>Adicionar Livros</h2>
         <form action="">
-          <label for="ititulo-livro">Título do Livro:</label>
-          <input type="text" name="ititulo-livro" id="ititulo-livro">
+          <label for="ititulo_livro">Título do Livro:</label>
+          <input type="text" name="ititulo_livro" id="ititulo_livro">
           <br>
           <label for="iautor">Autor:</label>
           <input type="text" name="iautor" id="iautor">
