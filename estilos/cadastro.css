@@ -107,6 +107,11 @@
 }
 
 
+
+input::placeholder {
+  padding: 10px;
+}
+
 .container .container-conteudo .container-form .container-conteudo-form a {
   width: 96px;
   height: 22px;

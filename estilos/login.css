@@ -110,6 +110,10 @@
   height: 24px;
 }
 
+input::placeholder {
+  padding: 10px;
+}
+
 .container .container-conteudo .container-form .container-conteudo-form .opcoes {
   display: flex;
 }
