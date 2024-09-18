@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cadastro de Alunos</title>
+  <link rel="stylesheet" href="../estilos/cadastro-alunos.css"> 
+</head>
+<body>
+
+  <header>
+    <img src="../img/logo-multimeios.png" alt="Logo">
+    <nav>
+        <li><a href="cadastro-livro.html">Home</a></li>
+        <li><a href="#">Cadastrar Alunos</a></li>
+        <li><a href="#">Reservar Livros</a></li>
+    </nav>
+  </header>
+
+  <main>
+    <div class="main-content">
+      <aside>
+        <div class="container-form">
+          <h2>Cadastre Alunos aqui</h2>
+          <form action="">
+            <label for="inome">Nome:</label>
+            <input type="text" name="inome" id="inome">
+            <br>
+            <label for="imatricula">Matriculo:</label>
+            <input type="number" name="imatricula" id="imatricula">
+            <br>
+            <label for="iturma">Turma</label>
+            <select name="" id="">
+              <option value="">Selecione uma turma</option>
+              <option value="1">1º Ano Informatica</option>
+              <option value="2">1º Ano Administração</option>
+              <option value="3">1º Ano Logística</option>
+              <option value="4">1º Ano Enfermagem</option>
+              <option value="5">2º Ano Informatica</option>
+              <option value="6">2º Ano Comercio</option>
+              <option value="7">2º Ano Enfermagem</option>
+              <option value="8">2º Ano Secretaria</option>
+              <option value="9">3º Ano Informatica</option>
+              <option value="10">3º Ano Enfermagem</option>
+              <option value="11">3º Ano Administração</option>
+              <option value="12">3º Ano Contabilidade</option>
+            </select>
+            <br>
+            <input type="submit" value="Cadastrar">
+          </form>
+        </div>
+
+        <div id="tasks-list-container" class="container-form">
+          <h2>Alunos Cadastrados:</h2>
+          <ul id="task-list">
+              <li class="task-box template hide">
+                  <span class="task-title">Teste 1</span>
+                  <ion-icon class="done-btn" name="checkmark-outline"></ion-icon>
+                  <ion-icon class="remove-btn" name="close-outline"></ion-icon>
+              </li>
+          </ul>
+        </div>
+      </aside>
+    </div>
+  </main>
+
+  <footer>
+    <p>© 2024 EEEP José Maria Falcão. Todos os direitos reservados</p>
+    <ul>
+      <li><a href="#">Sobre nós</a></li>
+      <li><a href="#">Termos de Uso</a></li>
+      <li><a href="#">Políticas de Privicidade</a></li>
+    </ul>
+  </footer>
+
+  <!-- Scripts do Ionicons -->
+  <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+
+</body>
+</html>
