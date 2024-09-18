@@ -1,6 +1,6 @@
 <?php
 session_start();
-if (!isset($_SESSION['user_id'])) {
+if (!isset($_SESSION['login'])) {
     header("Location: login.php");
     exit();
 }
@@ -16,7 +16,7 @@ if (!isset($_SESSION['user_id'])) {
 </head>
 <body>
     <div class="container">
-        <h1>Bem-vindo, <?php echo htmlspecialchars($_SESSION['user_name']); ?>!</h1>
+        <h1>Bem-vindo, <?php echo htmlspecialchars($_SESSION['name_user']); ?>!</h1>
         <p>Você está logado na página inicial.</p>
         <a href="logout.php">Sair</a>
     </div>
