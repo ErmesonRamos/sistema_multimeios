@@ -4,6 +4,8 @@
   box-sizing: border-box;
 }
 
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
 body {
   font-family: "Montserrat", sans-serif;
   background-color: #F4F4F4; /* Cor de fundo neutra que combina com o layout */
