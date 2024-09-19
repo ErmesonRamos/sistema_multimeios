@@ -1,7 +1,7 @@
 <?php
 try{
     DEFINE('HOST', 'localhost');
-    DEFINE('DB', 'bd_multimeios');
+    DEFINE('DB', 'new_sistema_multimeios');
     DEFINE('USER', 'root');
     DEFINE('PASS', 'bdjmf');
 

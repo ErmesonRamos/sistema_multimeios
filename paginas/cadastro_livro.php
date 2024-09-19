@@ -41,21 +41,21 @@ include_once('../conf/conexao.php');
             <label for="igenero">Gênero:</label>
             <select id="igenero" name="igenero" required>
               <option value="">Selecione um gênero</option>
-              <option value="ficcao">Ficção</option>
-              <option value="fantasia">Fantasia</option>
-              <option value="sci-fi">Sci-Fi</option>
-              <option value="romance">Romance</option>
-              <option value="aventura">Aventura</option>
-              <option value="misterio">Mistério</option>
-              <option value="biografia">Biografia</option>
-              <option value="autoajuda">Autoajuda</option>
-              <option value="historia">História</option>
-              <option value="poesia">Poesia</option>
-              <option value="literatura-infantojuvenil">Literatura Infantojuvenil</option>
-              <option value="ensaios">Ensaios</option>
-              <option value="religiao">Religião</option>
-              <option value="filosofia">Filosofia</option>
-              <option value="educacao">Educação</option>
+              <option value="Ficcao">Ficção</option>
+              <option value="Fantasia">Fantasia</option>
+              <option value="Sci-fi">Sci-Fi</option>
+              <option value="Romance">Romance</option>
+              <option value="Aventura">Aventura</option>
+              <option value="Misterio">Mistério</option>
+              <option value="Biografia">Biografia</option>
+              <option value="Autoajuda">Autoajuda</option>
+              <option value="Historia">História</option>
+              <option value="Poesia">Poesia</option>
+              <option value="Literatura-infantojuvenil">Literatura Infantojuvenil</option>
+              <option value="Ensaios">Ensaios</option>
+              <option value="Religiao">Religião</option>
+              <option value="Filosofia">Filosofia</option>
+              <option value="Educacao">Educação</option>
             </select>
             <br>
             <input type="submit" name="cadastrar" value="Cadastrar">
@@ -64,19 +64,19 @@ include_once('../conf/conexao.php');
             if(isset($_POST['cadastrar'])){
                 $ititulo_livro = $_POST['ititulo_livro'];
                 $iautor = $_POST['iautor'];
-                $genero = $_POST['genero'];
+                $igenero = $_POST['igenero'];
 
                 //echo $ititulo_livro."<br>";
                 //echo $iautor."<br>";
                 //echo $genero."<br>";
 
-                $cadastro = "INSERT INTO tb_book (title, author_book, gender_book) VALUES (:ititulo_livro, :iautor, :genero)";
+                $cadastro = "INSERT INTO tb_book (title, author_book, gender_book) VALUES (:ititulo_livro, :iautor, :igenero)";
 
                 try{
                     $result = $conect->prepare($cadastro);
                     $result -> bindParam(':ititulo_livro', $ititulo_livro, PDO::PARAM_STR);
                     $result -> bindParam(':iautor', $iautor, PDO::PARAM_STR);
-                    $result -> bindParam(':genero', $genero, PDO::PARAM_STR);
+                    $result -> bindParam(':igenero', $igenero, PDO::PARAM_STR);
                     $result -> execute();
 
                     $contar = $result->rowCount();

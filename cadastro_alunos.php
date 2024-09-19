@@ -21,12 +21,15 @@ include_once('conf/conexao.php');
     </nav>
   </header>
 
+  <div>
+    <a href="index.php">Ir para o Login</a>
+  </div>
   <main>
     <div class="main-content">
       <aside>
         <div class="container-form">
           <h2>Cadastre Alunos aqui</h2>
-          <form action="">
+          <form role="form" action="" method="post" enctype="multipart/form-data">
             <label for="inome">Nome:</label>
             <input type="text" name="inome" id="inome">
             <br>
@@ -39,33 +42,33 @@ include_once('conf/conexao.php');
             <label for="iturma">Turma</label>
             <select name="iturma" id="iturma">
               <option value="">Selecione uma turma</option>
-              <option value="1">1º Ano Informatica</option>
-              <option value="2">1º Ano Administração</option>
-              <option value="3">1º Ano Logística</option>
-              <option value="4">1º Ano Enfermagem</option>
-              <option value="5">2º Ano Informatica</option>
-              <option value="6">2º Ano Comercio</option>
-              <option value="7">2º Ano Enfermagem</option>
-              <option value="8">2º Ano Secretaria</option>
-              <option value="9">3º Ano Informatica</option>
-              <option value="10">3º Ano Enfermagem</option>
-              <option value="11">3º Ano Administração</option>
-              <option value="12">3º Ano Contabilidade</option>
+              <option value="1º Ano Informatica">1º Ano Informatica</option>
+              <option value="1º Ano Administração">1º Ano Administração</option>
+              <option value="1º Ano Logística">1º Ano Logística</option>
+              <option value="1º Ano Enfermagem">1º Ano Enfermagem</option>
+              <option value="2º Ano Informatica">2º Ano Informatica</option>
+              <option value="2º Ano Comercio">2º Ano Comercio</option>
+              <option value="2º Ano Enfermagem">2º Ano Enfermagem</option>
+              <option value="2º Ano Secretaria">2º Ano Secretaria</option>
+              <option value="3º Ano Informatica">3º Ano Informatica</option>
+              <option value="3º Ano Enfermagem">3º Ano Enfermagem</option>
+              <option value="3º Ano Administração">3º Ano Administração</option>
+              <option value="3º Ano Contabilidade">3º Ano Contabilidade</option>
             </select>
             <br>
             <input type="submit" name="cadastrar" value="Cadastrar">
           </form>
           <?php
             if(isset($_POST['cadastrar'])){
-                $inome = $_POST['inome'];
-                $iemail = $_POST['iemail'];
+                $inome = filter_input(INPUT_POST, 'inome', FILTER_SANITIZE_STRING);
+                $iemail = filter_input(INPUT_POST, 'iemail', FILTER_SANITIZE_STRING);
                 $isenha = password_hash($_POST['isenha'], PASSWORD_DEFAULT);
-                $iturma = $_POST['iturma'];
+                $iturma = filter_input(INPUT_POST, 'iturma', FILTER_SANITIZE_STRING);
 
-                //echo $inome."<br>";
-                //echo $iemail."<br>";
-                //echo $isenha."<br>";
-                //echo $iturma."<br>";
+                // echo $inome."<br>";
+                // echo $iemail."<br>";
+                // echo $isenha."<br>";
+                // echo $iturma."<br>";
 
                 $cadastro = "INSERT INTO tb_user (name_user, email_user, password_user, class) VALUES (:inome, :iemail, :isenha, :iturma)";
 
