@@ -159,6 +159,7 @@ form input[type="submit"]:hover {
 
 ion-icon {
   cursor: pointer;
+  font-size: 25px;
   margin-left: 10px;
 }
 
@@ -187,6 +188,10 @@ ion-icon {
   font-weight: 500;
 }
 
+#task-list > li.hide{
+  display: none;
+}
+
 footer {
   width: 100vw;
   height: 74px;
@@ -197,7 +202,7 @@ footer {
   justify-content: center;
   gap: 10px;
   color: white;
-  background-color: #7CD65B; /* Cor do fundo do footer */
+  background-color: #7CD65B; 
 }
 
 footer ul {
