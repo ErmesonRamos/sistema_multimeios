@@ -40,7 +40,7 @@ include_once('conf/conexao.php');
             <input type="password" name="isenha" id="isenha">
             <br>
             <label for="iturma">Turma</label>
-            <select name="iturma" id="iturma">
+            <select name="iturma" id="iturma" required>
               <option value="">Selecione uma turma</option>
               <option value="1º Ano Informatica">1º Ano Informatica</option>
               <option value="1º Ano Administração">1º Ano Administração</option>
