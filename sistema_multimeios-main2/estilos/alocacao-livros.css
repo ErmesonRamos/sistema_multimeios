@@ -1,0 +1,210 @@
+/* Reseta margens e paddings */
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+body {
+  font-family: "Montserrat", sans-serif;
+  background-color: #F4F4F4; 
+}
+
+header {
+  width: 100vw;
+  height: 41px;
+  display: flex;
+  justify-content: space-between;
+  background-color: #00AAAD; 
+}
+
+header img {
+  width: 42px;
+  height: 41px;
+}
+
+header nav {
+  display: flex;
+  align-items: center;
+}
+
+header nav li {
+  list-style: none;
+  padding: 10px;
+}
+
+header nav li > a {
+  color: white;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.search-container {
+  display: flex;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  overflow: hidden;
+  margin-top: 40px;
+  margin-bottom: 40px;
+}
+
+.search-container input[type="text"] {
+  border: none;
+  padding: 10px;
+  font-size: 16px;
+  flex: 1;
+}
+
+.search-container button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.search-container button:hover {
+  background-color: #0056b3;
+}
+
+main {
+  width: 800px;
+  margin: auto;
+}
+
+main aside {
+  display: flex;
+  flex-wrap: wrap; 
+  gap: 20px; 
+  justify-content: space-between; 
+}
+
+@media (max-width: 720px) {
+  main {
+    width: 90%; 
+  }
+
+  main aside {
+    flex-direction: column;
+    gap: 20px; 
+    align-items: center; 
+  }
+
+  main aside .conteiner-card {
+    width: 100%; 
+    max-width: 400px; 
+  }
+}
+
+main aside .conteiner-card {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  overflow: hidden;
+  background-color: white;
+  width: 198px; 
+}
+
+main aside .conteiner-card .conteiner-thumbnail {
+  width: 198px;
+  height: 203px;
+  background-color: gray;
+}
+
+main aside .conteiner-card .conteiner-informacao {
+  width: 198px;
+  height: 71px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+main aside .conteiner-card .conteiner-informacao h4 {
+  text-align: center;
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 18.29px;
+}
+
+main aside .conteiner-card .conteiner-informacao p {
+  text-align: center;
+  font-weight: 300;
+  font-size: 15px;
+  line-height: 18.29px;
+}
+
+main aside .conteiner-card .conteiner-btn {
+  width: 198px;
+  height: 64px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 7px;
+  background-color: #00AAAD;
+}
+
+main aside .conteiner-card .conteiner-btn a {
+  text-decoration: none;
+  font-weight: bold;
+  color: white;
+}
+
+
+.container-proxima-pagina {
+  margin-top: 40px;
+  margin-bottom: 600px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 30px;
+}
+
+.container-proxima-pagina a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 119px;
+  height: 28px;
+  color: white;
+  background-color: #7CD65B;
+  border-radius: 15px;
+  font-size: 14px;
+  font-weight: 500;
+  text-align: center;
+  text-decoration: none;
+  line-height: 17.07px;
+}
+
+footer {
+  width: 100vw;
+  height: 74px;
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  color: white;
+  background-color: #7CD65B; 
+}
+
+footer ul {
+  display: flex;
+  gap: 30px;
+}
+
+footer ul > li {
+  list-style: none;
+}
+
+footer ul > li > a {
+  text-decoration: none;
+  font-weight: bold;
+  color: white;
+}
