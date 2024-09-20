@@ -41,4 +41,20 @@ addLivro.addEventListener('click', (event) => {
   document.querySelector('#ititulo-livro').value = '';
   document.querySelector('#iautor').value = '';
   document.querySelector('#igenero').value = '';
+
+
+  removeIcon.addEventListener('click', (event) => {
+    event.preventDefault();
+    confirm('Tu é doido FDP')
+    taskListItem.remove();
+  })
+
+  doneIcon.addEventListener('click', (event) => {
+    event.preventDefault();
+    taskTitle.contentEditable = true;
+    
+    
+  })
 });
+
+
