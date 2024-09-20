@@ -3,7 +3,7 @@ include_once('conf/conexao.php');
 ob_start(); //armazena dados em cache
 session_start();
 if(isset($_SESSION['loginUser']) && (isset($_SESSION['senhaUser']))){
-    header("Location: paginas/cadastro_livro.php");
+    header("Location: paginas/content/cadastro_livro.php");
 }
 ?>
 
@@ -45,7 +45,7 @@ if(isset($_SESSION['loginUser']) && (isset($_SESSION['senhaUser']))){
             $senha = filter_input(INPUT_POST, 'senha', FILTER_DEFAULT);
         
             // Modifique a consulta para buscar apenas pelo e-mail
-            $select = "SELECT * FROM tb_user WHERE email_user=:emailLogin";
+            $select = "SELECT * FROM tb_admin WHERE email_admin=:emailLogin";
         
             try {
                 $resultLogin = $conect->prepare($select);
@@ -55,11 +55,11 @@ if(isset($_SESSION['loginUser']) && (isset($_SESSION['senhaUser']))){
                 if ($resultLogin->rowCount() > 0) {
                     $user = $resultLogin->fetch(PDO::FETCH_ASSOC);
                     // Verifique a senha usando password_verify
-                    if (password_verify($senha, $user['password_user'])) {
+                    if (password_verify($senha, $user['password_admin'])) {
                         // A senha está correta
                         $_SESSION['loginUser'] = $login;
                         echo '<strong>Login realizado com sucesso! Aguarde...</strong>';
-                        header("Location: paginas/cadastro_livro.php");
+                        header("Location: paginas/content/cadastro_livro.php");
                         exit();
                     } else {
                         // A senha está incorreta

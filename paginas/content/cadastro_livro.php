@@ -58,9 +58,6 @@ include_once('../../conf/conexao.php');
               <option value="Educacao">Educação</option>
             </select>
             <br>
-            <label for="icapa">Capa ou Ilustração:</label>
-            <input type="file" name="icapa" id="icapa" required>
-            <br>
             <input type="submit" name="cadastrar" value="Cadastrar">
           </form>
           <?php
@@ -68,46 +65,28 @@ include_once('../../conf/conexao.php');
                 $ititulo_livro = $_POST['ititulo_livro'];
                 $iautor = $_POST['iautor'];
                 $igenero = $_POST['igenero'];
-                $icapa = $_FILES['icapa'];
+                
+                $cadastro = "INSERT INTO tb_book (title, author_book, gender_book) VALUES (:ititulo_livro, :iautor, :igenero)";
 
-                //tratamento da imagem/capa ;)
-                $formatOk = array("png", "jpg", "jpeg", "JPG");
-                $extensaoCapa = pathinfo($_FILES['icapa']['name'], PATHINFO_EXTENSION);
+                try{
+                  $result = $conect->prepare($cadastro);
+                  $result -> bindParam(':ititulo_livro', $ititulo_livro, PDO::PARAM_STR);
+                  $result -> bindParam(':iautor', $iautor, PDO::PARAM_STR);
+                  $result -> bindParam(':igenero', $igenero, PDO::PARAM_STR);
+                  $result -> execute();
 
-                if(in_array($extensaoCapa, $formatOk)){
-                  $pasta = "../img/capas_livros/";
-                  $local_temporario = $_FILES['icapa']['tmp_name'];
-                  $newnameCapa = uniqid().".$extensaoCapa";
+                  $contar = $result->rowCount();
 
-                  if(move_uploaded_file($local_temporario, $pasta.$newnameCapa)){
-                    $cadastro = "INSERT INTO tb_book (title, author_book, gender_book, book_cover) VALUES (:ititulo_livro, :iautor, :igenero, :icapa)";
-
-                    try{
-                      $result = $conect->prepare($cadastro);
-                      $result -> bindParam(':ititulo_livro', $ititulo_livro, PDO::PARAM_STR);
-                      $result -> bindParam(':iautor', $iautor, PDO::PARAM_STR);
-                      $result -> bindParam(':igenero', $igenero, PDO::PARAM_STR);
-                      $result -> bindParam(':icapa', $newnameCapa, PDO::PARAM_STR);
-                      $result -> execute();
-  
-                      $contar = $result->rowCount();
-
-                      if($contar > 0){
-                          echo "Livro cadastrado com sucesso !  :)";
-                      }else{
-                          echo "Ocorreu um erro ao tentar cadastrar o livro !  ;(";
-                      }
-                  }catch(PDOException $e){
-                      echo '<strong> ERRO DE PDO </strong>'.$e->getMessage();
+                  if($contar > 0){
+                      echo "Livro cadastrado com sucesso !  :)";
+                  }else{
+                      echo "Ocorreu um erro ao tentar cadastrar o livro !  ;(";
                   }
-              }else{
-                echo "<strong>Erro, não foi possível fazer o upload do arquivo ! </strong> ;(";
+              }catch(PDOException $e){
+                  echo '<strong> ERRO DE PDO </strong>'.$e->getMessage();
               }
-                  }
-
-                }else{
-                  echo "<strong> Formato de Imagem Inválido </strong>";
-                }
+            }
+                  
 
                 //echo $ititulo_livro."<br>";
                 //echo $iautor."<br>";

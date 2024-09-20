@@ -39,7 +39,7 @@ if (isset($_POST['editar'])) {
         $result = $conect->prepare($update);
         $result->bindParam(':ititulo_livro', $ititulo_livro, PDO::PARAM_STR);
         $result->bindParam(':iautor', $iautor, PDO::PARAM_STR);
-        $result->bindParam(':genero', $genero, PDO::PARAM_STR);
+        $result->bindParam(':igenero', $genero, PDO::PARAM_STR);
         $result->bindParam(':id', $id, PDO::PARAM_INT);
         $result->execute();
 

@@ -1,5 +1,5 @@
 <?php
-include_once('conf/conexao.php');
+include_once('../../conf/conexao.php');
 ?>
 
 <!DOCTYPE html>
@@ -8,12 +8,12 @@ include_once('conf/conexao.php');
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Cadastro de Alunos</title>
-  <link rel="stylesheet" href="estilos/cadastro-alunos.css"> 
+  <link rel="stylesheet" href="../../estilos/cadastro-alunos.css"> 
 </head>
 <body>
 
   <header>
-    <img src="img/logo-multimeios.png" alt="Logo">
+    <img src="../../img/logo-multimeios.png" alt="Logo">
     <nav>
         <li><a href="paginas/cadastro_livro.php">Home</a></li>
         <li><a href="#">Cadastrar Alunos</a></li>
