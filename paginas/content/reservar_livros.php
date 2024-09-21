@@ -9,15 +9,6 @@
 </head>
 <body>
 
-  <header>
-    <img src="../../img/logo-multimeios.png" alt="Logo">
-    <nav>
-        <li><a href="cadastro_livro.php">Home</a></li>
-        <li><a href="../../cadastro_alunos.php">Cadastrar Alunos</a></li>
-        <li><a href="#">Reservar Livros</a></li>
-    </nav>
-  </header>
-
   <div class="search-container">
     <input type="text" placeholder="Pesquise pelo título de seu livro, genêro e autor">
     <button type="submit"><i class="fas fa-search"></i></button>
@@ -27,7 +18,7 @@
     <aside>
       <div class="conteiner-card">
         <?php
-            include_once('../../conf/conexao.php');
+            include_once('../conf/conexao.php');
 
         ?>
         <div class="conteiner-thumbnail"></div>
@@ -78,6 +69,6 @@
       <li><a href="#">Políticas de Privicidade</a></li>
     </ul>
   </footer>
-
+  <script src="../JS/script.js"></script>
 </body>
 </html>

@@ -1,0 +1,94 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 20px;
+}
+
+.container-form {
+    max-width: 100%;
+    margin: auto;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    overflow-x: auto; /* Permite rolagem horizontal em telas pequenas */
+}
+
+h2 {
+    text-align: center;
+    color: #333;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: auto; /* Permite que a tabela se ajuste conforme necessário */
+}
+
+table th, table td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: left;
+}
+
+table th {
+    background-color: #f2f2f2;
+}
+
+img {
+    max-width: 100px; /* Ajuste o tamanho conforme necessário */
+    height: auto;
+    border-radius: 5px; /* Bordas arredondadas para a imagem */
+}
+
+.done-btn, .remove-btn {
+    text-decoration: none;
+    color: white;
+    padding: 8px 12px;
+    border-radius: 5px;
+    font-size: 14px;
+    margin-right: 5px; /* Espaço entre os botões */
+    display: inline-block; /* Para que os botões fiquem em linha */
+}
+
+.done-btn {
+    background-color: #4CAF50; /* Verde para editar */
+}
+
+.remove-btn {
+    background-color: #F44336; /* Vermelho para deletar */
+}
+
+.done-btn:hover {
+    background-color: #45a049; /* Verde escuro ao passar o mouse */
+}
+
+.remove-btn:hover {
+    background-color: #e53935; /* Vermelho escuro ao passar o mouse */
+}
+
+/* Estilos para dispositivos móveis */
+@media (max-width: 600px) {
+    table, thead, tbody, th, td, tr {
+        display: block; /* Transformar a tabela em uma lista em telas pequenas */
+    }
+    
+    th {
+        display: none; /* Esconder cabeçalho em telas pequenas */
+    }
+
+    td {
+        text-align: right; /* Alinhar o texto à direita */
+        position: relative;
+        padding-left: 50%; /* Espaço para o label */
+    }
+
+    td:before {
+        content: attr(data-label); /* Usar o valor do atributo data-label como rótulo */
+        position: absolute;
+        left: 10px;
+        width: calc(50% - 20px);
+        text-align: left; /* Alinhamento do label */
+    }
+}

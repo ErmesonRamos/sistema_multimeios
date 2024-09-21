@@ -7,39 +7,29 @@ include_once('conf/conexao.php');
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Cadastro de Alunos</title>
-  <link rel="stylesheet" href="estilos/cadastro-alunos.css"> 
+  <title>Cadastro de Administradores</title>
+  <link rel="stylesheet" href="estilos/login.css">
 </head>
 <body>
-
-  <header>
-    <img src="img/logo-multimeios.png" alt="Logo">
-    <nav>
-        <li><a href="paginas/cadastro_livro.php">Home</a></li>
-        <li><a href="#">Cadastrar Alunos</a></li>
-        <li><a href="layout/alocacao-livros.html">Reservar Livros</a></li>
-    </nav>
-  </header>
-
-  <div>
-    <a href="index.php">Ir para o Login</a>
-  </div>
-  <main>
-    <div class="main-content">
-      <aside>
-        <div class="container-form">
-          <h2>Cadastro de Administradores</h2>
+<div class="container">
+    <div class="container-conteudo">
+      <div class="container-img">
+        <div class="conteiner-conteudo-img">
+          <img src="img/logotipo-multimeios.png" alt="">
+          <h2>MULTIMEIOS JMF</h2>
+          <p>Acesse livros e gerencie seus materiais com facilidade. Apoio ao seu aprendizado!</p>
+        </div>
+      </div>
+      <div class="container-form">
+        <div class="container-conteudo-form">
           <form role="form" action="" method="post" enctype="multipart/form-data">
-            <label for="anome">Nome:</label>
-            <input type="text" name="anome" id="anome">
-            <br>
-            <label for="aemail">Email:</label>
-            <input type="email" name="aemail" id="aemail">
-            <br>
-            <label for="asenha">Senha:</label>
-            <input type="password" name="asenha" id="asenha">
-            <br>
-            <input type="submit" name="cadastrar" value="Cadastrar">
+            <h2>Crie sua conta:</h2>
+            <input type="text" name="anome" placeholder="Nome" required>
+            <input type="email" name="aemail" placeholder="E-mail" required>
+            <input type="password" name="asenha" placeholder="Senha" required>
+        </div>
+        <br>
+        <input type="submit" name="cadastrar" value="Cadastrar-se">
           </form>
           <?php
             if(isset($_POST['cadastrar'])){
@@ -64,7 +54,14 @@ include_once('conf/conexao.php');
                     $contar = $result->rowCount();
 
                     if($contar > 0){
-                        echo "Cadastrado com sucesso !  :)";
+                      echo 'Cadastrado com sucesso !  :)<br>
+                      <strong>Faça login para acessar o sistema!</strong><br>
+                      Aguarde, você está sendo redirecionado...';
+                      echo "<script>setTimeout(function(){
+                      window.location.href = 'index.php';
+                      }, 3000); // Redireciona após 3 segundos (3000 milissegundos)</script>";
+                      // Envia todo o conteúdo para o navegador imediatamente
+                      flush(); // Força o envio do conteúdo para o navegador
                     }else{
                         echo "Ocorreu um erro ao tentar cadastrar !  ;(";
                     }
@@ -77,15 +74,6 @@ include_once('conf/conexao.php');
       </aside>
     </div>
   </main>
-
-  <footer>
-    <p>© 2024 EEEP José Maria Falcão. Todos os direitos reservados</p>
-    <ul>
-      <li><a href="#">Sobre nós</a></li>
-      <li><a href="#">Termos de Uso</a></li>
-      <li><a href="#">Políticas de Privicidade</a></li>
-    </ul>
-  </footer>
 
   <!-- Scripts do Ionicons -->
   <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>

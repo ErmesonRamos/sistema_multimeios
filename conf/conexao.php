@@ -3,7 +3,7 @@ try{
     DEFINE('HOST', 'localhost');
     DEFINE('DB', 'new_sistema_multimeios');
     DEFINE('USER', 'root');
-    DEFINE('PASS', 'bdjmf');
+    DEFINE('PASS', 'whbr@520k#tk');
 
     $conect = new PDO('mysql:host='.HOST.';dbname='.DB,USER,PASS);
     $conect -> setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);

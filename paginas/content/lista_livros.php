@@ -2,18 +2,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lista de Alunos</title>
+    <title>Lista de Livros</title>
     <link rel="stylesheet" href="../estilos/listagem.css">
 </head>
 <body>
 <div id="tasks-list-container" class="container-form">
-    <h2>Alunos Cadastrados:</h2>
+    <h2>Livros Cadastrados:</h2>
     <table>
     <tbody>
     <?php
     include_once('../conf/conexao.php');
 
-        $select = "SELECT * FROM tb_student ORDER BY id_student DESC LIMIT 10";
+        $select = "SELECT * FROM tb_book ORDER BY id_book DESC LIMIT 6";
         
         try{
             $result = $conect->prepare($select);
@@ -27,15 +27,15 @@
     ?>
     <tr id="task-list" class="task-box template hide">
     <td data-label="ID"><?php echo $cont++; ?></td>
-    <td data-label="Nome"><?php echo $show->name_student; ?></td>
-    <td data-label="Email"><?php echo $show->email_student; ?></td>
-    <td data-label="Turma"><?php echo $show->class; ?></td>
-    <td data-label="Foto">
-        <img src="../img/fotos_alunos/<?php echo $show->photo; ?>" alt="Foto">
+    <td data-label="Título"><?php echo $show->title; ?></td>
+    <td data-label="Autor"><?php echo $show->author_book; ?></td>
+    <td data-label="Gênero"><?php echo $show->gender_book; ?></td>
+    <td data-label="Capa">
+        <img src="../img/capas_livros/<?php echo $show->book_cover; ?>" alt="Capa do Livro">
     </td>
     <td data-label="Ações">
-    <a <?php echo 'href="home.php?acao=editar_alunos&idUpdate=' . $show->id_project . '"'?>>Atualizar dados do Aluno</a>
-    <a <?php echo 'href="home.php?acao=deletar_alunos&idDel=' . $show->id_project . '"'?> onclick="return confirm('AVISO! Esta ação nao pode ser desfeita!')">Excluir Aluno</a>
+        <a href="home.php?acao=editarLivros<?php echo $show->id_book; ?>" class="done-btn" title="Editar Livro">Editar</a>
+        <a href="deletar_livros.php?idDel=<?php echo $show->id_book; ?>" class="remove-btn" onclick="return confirm('Deseja remover o livro?')">Deletar</a>
     </td>
     </tr>
 
