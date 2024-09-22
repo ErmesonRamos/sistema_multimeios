@@ -1,94 +1,69 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
+    font-family: "Poppins", sans-serif;
+    background-color: #f4f4f4; /* Fundo suave */
     margin: 0;
     padding: 20px;
 }
 
-.container-form {
-    max-width: 100%;
-    margin: auto;
-    background: white;
-    border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    padding: 20px;
-    overflow-x: auto; /* Permite rolagem horizontal em telas pequenas */
-}
-
 h2 {
-    text-align: center;
-    color: #333;
+    text-align: center; /* Centraliza o título */
+    color: #333; /* Cor do título */
+    margin-bottom: 20px; /* Espaço abaixo do título */
 }
 
 table {
-    width: 100%;
-    border-collapse: collapse;
-    table-layout: auto; /* Permite que a tabela se ajuste conforme necessário */
+    width: 100%; /* Largura total da tabela */
+    border-collapse: collapse; /* Junta bordas */
+    margin: 0 auto; /* Centraliza a tabela */
+    background-color: #fff; /* Fundo branco */
+    border-radius: 8px; /* Cantos arredondados */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Sombra leve */
 }
 
-table th, table td {
-    border: 1px solid #ddd;
-    padding: 10px;
-    text-align: left;
+th, td {
+    padding: 12px; /* Espaçamento interno */
+    text-align: center; /* Centraliza o texto horizontalmente */
+    vertical-align: middle; /* Alinha verticalmente ao centro */
+    border-bottom: 1px solid #ddd; /* Linha entre as linhas */
 }
 
-table th {
-    background-color: #f2f2f2;
+th {
+    background-color: #4CAF50; /* Fundo verde para cabeçalho */
+    color: white; /* Texto branco no cabeçalho */
+    font-weight: bold; /* Negrito no cabeçalho */
 }
 
-img {
-    max-width: 100px; /* Ajuste o tamanho conforme necessário */
-    height: auto;
-    border-radius: 5px; /* Bordas arredondadas para a imagem */
+tr:hover {
+    background-color: #f1f1f1; /* Fundo leve ao passar o mouse */
+}
+
+td img {
+    width: 50px; /* Tamanho da imagem */
+    height: 50px; /* Altura fixa para manter a proporção */
+    border-radius: 50%; /* Faz a imagem ser circular */
+    display: block; /* Faz a imagem ocupar um bloco */
+    margin: 0 auto; /* Centraliza a imagem na célula */
 }
 
 .done-btn, .remove-btn {
+    display: inline-block;
+    padding: 6px 12px;
+    border-radius: 4px;
     text-decoration: none;
-    color: white;
-    padding: 8px 12px;
-    border-radius: 5px;
-    font-size: 14px;
-    margin-right: 5px; /* Espaço entre os botões */
-    display: inline-block; /* Para que os botões fiquem em linha */
+    color: #fff;
+    margin: 0 5px; /* Margem entre os botões */
 }
 
 .done-btn {
-    background-color: #4CAF50; /* Verde para editar */
+    background-color: #4CAF50; /* Verde */
 }
 
 .remove-btn {
-    background-color: #F44336; /* Vermelho para deletar */
+    background-color: #f44336; /* Vermelho */
 }
 
-.done-btn:hover {
-    background-color: #45a049; /* Verde escuro ao passar o mouse */
-}
-
-.remove-btn:hover {
-    background-color: #e53935; /* Vermelho escuro ao passar o mouse */
-}
-
-/* Estilos para dispositivos móveis */
-@media (max-width: 600px) {
-    table, thead, tbody, th, td, tr {
-        display: block; /* Transformar a tabela em uma lista em telas pequenas */
-    }
-    
-    th {
-        display: none; /* Esconder cabeçalho em telas pequenas */
-    }
-
-    td {
-        text-align: right; /* Alinhar o texto à direita */
-        position: relative;
-        padding-left: 50%; /* Espaço para o label */
-    }
-
-    td:before {
-        content: attr(data-label); /* Usar o valor do atributo data-label como rótulo */
-        position: absolute;
-        left: 10px;
-        width: calc(50% - 20px);
-        text-align: left; /* Alinhamento do label */
-    }
+.done-btn:hover, .remove-btn:hover {
+    opacity: 0.9; /* Leve transparência ao passar o mouse */
 }

@@ -1,5 +1,6 @@
 @charset "UTF-8";
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 * {
   padding: 0;
   margin: 0;
@@ -42,7 +43,7 @@
 
 .container .container-conteudo .container-img .conteiner-conteudo-img h2 {
   margin-bottom: 20px;
-  font-family: "Montserrat", sans-serif;
+  font-family: "Poppins", sans-serif;
   line-height: 29.26px;
   font-size: 24px;
   font-weight: 700;
@@ -56,7 +57,7 @@
   font-size: 20px;
   font-weight: 300;
   text-align: center;
-  font-family: "Montserrat", sans-serif;
+  font-family: "Poppins", sans-serif;
   color: white;
 }
 
@@ -85,7 +86,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  font-family: "Montserrat", sans-serif;
+  font-family: "Poppins", sans-serif;
 }
 
 .container .container-conteudo .container-form .container-conteudo-form form h2 {
@@ -146,7 +147,7 @@ input::placeholder {
   line-height: 19.5px;
   font-weight: 600;
   font-size: 16px;
-  font-family: "Montserrat", sans-serif;
+  font-family: "Poppins", sans-serif;
   border: none;
   border-radius: 20px;
 }

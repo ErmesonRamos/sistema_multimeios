@@ -11,9 +11,6 @@
     <h1>Explore Conhecimento Ilimitado</h1>
     <p>Acesse Milhares de Livros, Artigos e Recursos Educacionais de Nossa Biblioteca.</p>
 </div>
-
-<div>
-<a href="">Fazer logout</a>
-</div>
+   
 </body>
 </html>

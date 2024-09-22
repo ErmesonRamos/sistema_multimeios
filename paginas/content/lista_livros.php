@@ -1,4 +1,4 @@
-<html lang="en">
+<html lang="pt_br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -6,9 +6,17 @@
     <link rel="stylesheet" href="../estilos/listagem.css">
 </head>
 <body>
-<div id="tasks-list-container" class="container-form">
+<div>
     <h2>Livros Cadastrados:</h2>
     <table>
+    <thead>
+        <tr>
+            <th>Título</th>
+            <th>Autor</th>
+            <th>Gênero</th>
+            <th>Capa</th>
+        </tr>
+    </thead>
     <tbody>
     <?php
     include_once('../conf/conexao.php');
@@ -34,8 +42,8 @@
         <img src="../img/capas_livros/<?php echo $show->book_cover; ?>" alt="Capa do Livro">
     </td>
     <td data-label="Ações">
-        <a href="home.php?acao=editarLivros<?php echo $show->id_book; ?>" class="done-btn" title="Editar Livro">Editar</a>
-        <a href="deletar_livros.php?idDel=<?php echo $show->id_book; ?>" class="remove-btn" onclick="return confirm('Deseja remover o livro?')">Deletar</a>
+        <a href="home.php?acao=editarLivros&idUpdate=<?php echo $show->id_book; ?>" class="done-btn" title="Editar Livro">Editar</a>
+        <a href="home.php?acao=deletarLivros&idDel=<?php echo $show->id_book; ?>" class="remove-btn" onclick="return confirm('Deseja remover o livro?')">Deletar</a>
     </td>
     </tr>
 

@@ -1,4 +1,5 @@
 <?php
+
 include_once('../includes/header.php');
 
 // Sanitização de entrada -- substituido 'filter_var() e FILTER_SANITIZE_STRING por htmlspecialchars() :: chat disse estar depreciado no php 8.1
@@ -13,6 +14,7 @@ $paginas = [
     'deletarLivros' => 'content/deletar_livros.php',
     'listaLivros' => 'content/lista_livros.php',
     'reservarLivros' => 'content/reservar_livros.php',
+    'reservaLista' => 'content/lista_reservas.php',
     'cadastrarAlunos' => 'content/cadastrar_alunos.php',
     'listaAlunos' => 'content/lista_alunos.php',
     'editarAlunos' => 'content/editar_alunos.php',

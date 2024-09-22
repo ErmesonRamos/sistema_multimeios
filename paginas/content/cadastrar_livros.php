@@ -14,6 +14,7 @@ include_once('../conf/conexao.php');
     <div class="main-content">
       <aside>
         <div class="container-form">
+        <a href="home.php?acao=listaLivros">Lista de Livros</a>
           <h2>Cadastre Livros aqui</h2>
           <form role="form" action="" method="post" enctype="multipart/form-data">
             <label for="ititulo-livro">Título do Livro:</label>
@@ -24,7 +25,7 @@ include_once('../conf/conexao.php');
             <br>
             <label for="igenero">Gênero:</label>
             <select id="igenero" name="igenero" required>
-              <option value="">Selecione um gênero</option>
+              <option value="" disabled selected>Selecione um gênero</option>
               <option value="Ficcao">Ficção</option>
               <option value="Fantasia">Fantasia</option>
               <option value="Sci-fi">Sci-Fi</option>
@@ -94,13 +95,13 @@ include_once('../conf/conexao.php');
                   $contar = $result->rowCount();
 
                   if($contar > 0){
-                      echo "Livro cadastrado com sucesso !  :)";
-                      echo "<script>setTimeout(function(){
-                      window.location.href = '../home.php?acao=cadastrarLivros';
-                      }, 3000); // Redireciona após 3 segundos (3000 milissegundos)</script>";
-                      flush();
+                      echo 'Livro Adicionado com sucesso !  :)<br>Vamos ler?';
+                      header("Refresh: 3; url=home.php?acao=cadastrarLivros");
+                      exit();
                   }else{
                       echo "Ocorreu um erro ao tentar cadastrar o livro !  ;(";
+                      header("Refresh: 5; url=home.php?acao=cadastrarLivros");
+                      exit();
                   }
               }catch(PDOException $e){
                   echo '<strong> ERRO DE PDO </strong>'.$e->getMessage();

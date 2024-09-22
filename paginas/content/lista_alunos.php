@@ -6,9 +6,17 @@
     <link rel="stylesheet" href="../estilos/listagem.css">
 </head>
 <body>
-<div id="tasks-list-container" class="container-form">
-    <h2>Alunos Cadastrados:</h2>
+<div>
     <table>
+    <h2>Alunos Cadastrados:</h2>
+    <thead>
+            <tr>
+                <th>Nome</th>
+                <th>Email</th>
+                <th>Turma</th>
+                <th>Foto</th>
+            </tr>
+    </thead>
     <tbody>
     <?php
     include_once('../conf/conexao.php');
@@ -34,8 +42,8 @@
         <img src="../img/fotos_alunos/<?php echo $show->photo; ?>" alt="Foto">
     </td>
     <td data-label="Ações">
-    <a <?php echo 'href="home.php?acao=editar_alunos&idUpdate=' . $show->id_project . '"'?>>Atualizar dados do Aluno</a>
-    <a <?php echo 'href="home.php?acao=deletar_alunos&idDel=' . $show->id_project . '"'?> onclick="return confirm('AVISO! Esta ação nao pode ser desfeita!')">Excluir Aluno</a>
+        <a href="home.php?acao=editarAlunos&idUpdate=<?php echo $show->id_student; ?>" class="done-btn" title="Editar dados do Aluno">Editar</a>
+        <a href="home.php?acao=deletarAlunos&idDel=<?php echo $show->id_student; ?>" class="remove-btn" onclick="return confirm('Deseja remover o aluno?')">Deletar</a>
     </td>
     </tr>
 
