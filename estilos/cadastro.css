@@ -125,7 +125,7 @@ input::placeholder {
 }
 
 
-.container .container-conteudo .container-form .container-conteudo-form form input[type="submit"] {
+.container .container-conteudo .container-form input[type="submit"] {
   width: 200px;
   height: 32px;
   background-color: #7CD65B;

@@ -45,7 +45,6 @@ addLivro.addEventListener('click', (event) => {
 
   removeIcon.addEventListener('click', (event) => {
     event.preventDefault();
-    confirm('Tu é doido FDP')
     taskListItem.remove();
   })
 
