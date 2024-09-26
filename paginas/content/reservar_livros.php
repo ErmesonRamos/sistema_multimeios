@@ -47,40 +47,41 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <link rel="stylesheet" href="../estilos/reserva.css">
 </head>
 <body>
-<div class="container">
-        <a href="home.php?acao=reservaLista" class="link">Lista de Reservas</a>
-        <h2>Reservar Livro</h2>
-        <form method="POST">
-            <div class="form-group">
-                <label for="id_book">Livro:</label>
-                <select name="id_book" required>
-                    <?php while ($livro = $livros_result->fetch(PDO::FETCH_ASSOC)) : ?>
-                        <option value="<?= $livro['id_book']; ?>"><?= $livro['title']; ?></option>
-                    <?php endwhile; ?>
-                </select>
-            </div>
+    <div class="container">
+        <div class="conteiner-infor">
+            <a href="home.php?acao=reservaLista" class="link">Lista de Reservas</a>
+            <h2>Reservar Livro</h2>
+        </div>
+        <div class="conteiner-form">
+            <form method="POST">
+                <div class="form-group">
+                    <label for="id_book">Livro:</label>
+                    <select name="id_book" required>
+                        <?php while ($livro = $livros_result->fetch(PDO::FETCH_ASSOC)) : ?>
+                            <option value="<?= $livro['id_book']; ?>"><?= $livro['title']; ?></option>
+                        <?php endwhile; ?>
+                    </select>
+                </div>
             
-            <div class="form-group">
-                <label for="id_student">Aluno:</label>
-                <select name="id_student" required>
-                    <?php while ($aluno = $alunos_result->fetch(PDO::FETCH_ASSOC)) : ?>
-                        <option value="<?= $aluno['id_student']; ?>"><?= $aluno['name_student']; ?></option>
-                    <?php endwhile; ?>
-                </select>
-            </div>
-
-            <div class="form-group">
-                <label for="booking_day">Data de Reserva:</label>
-                <input type="date" name="booking_day" value="<?= $today; ?>" required>
-            </div>
-
-            <div class="form-group">
-                <label for="return_day">Data de Devolução:</label>
-                <input type="date" name="return_day" required>
-            </div>
-
-            <button type="submit" class="btn">Reservar</button>
-        </form>
+                <div class="form-group">
+                    <label for="id_student">Aluno:</label>
+                    <select name="id_student" required>
+                        <?php while ($aluno = $alunos_result->fetch(PDO::FETCH_ASSOC)) : ?>
+                            <option value="<?= $aluno['id_student']; ?>"><?= $aluno['name_student']; ?></option>
+                        <?php endwhile; ?>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="booking_day">Data de Reserva:</label>
+                    <input type="date" name="booking_day" value="<?= $today; ?>" required>
+                </div>
+                <div class="form-group">
+                    <label for="return_day">Data de Devolução:</label>
+                    <input type="date" name="return_day" required>
+                </div>
+                <button type="submit" class="btn">Reservar</button>
+            </form>
+        </div>
     </div>
 </body>
 </html>
