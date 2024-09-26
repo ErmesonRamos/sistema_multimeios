@@ -28,6 +28,10 @@ $reservas_result = $conect->query($reservas_query);
     <title>Lista de Reservas</title>
     
     <style>
+        .conteiner {
+            margin-top: 50px;
+            margin-bottom: 800px;
+        }
         table {
             width: 80%;
             margin: 20px auto;
@@ -44,28 +48,30 @@ $reservas_result = $conect->query($reservas_query);
     </style>
 </head>
 <body>
-    <h2 style="text-align:center;">Lista de Reservas</h2>
-    <table>
-        <thead>
-            <tr>
-                <th>ID Reserva</th>
-                <th>Título do Livro</th>
-                <th>Nome do Aluno</th>
-                <th>Data de Reserva</th>
-                <th>Data de Devolução</th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php while ($reserva = $reservas_result->fetch(PDO::FETCH_ASSOC)) : ?>
+    <div class="conteiner">
+        <h2 style="text-align:center;">Lista de Reservas</h2>
+        <table>
+            <thead>
                 <tr>
-                    <td><?= $reserva['id_reserve']; ?></td>
-                    <td><?= $reserva['book_title']; ?></td>
-                    <td><?= $reserva['name_student']; ?></td>
-                    <td><?= date('d/m/Y', strtotime($reserva['booking_day'])); ?></td>
-                    <td><?= date('d/m/Y', strtotime($reserva['return_day'])); ?></td>
+                    <th>ID Reserva</th>
+                    <th>Título do Livro</th>
+                    <th>Nome do Aluno</th>
+                    <th>Data de Reserva</th>
+                    <th>Data de Devolução</th>
                 </tr>
-            <?php endwhile; ?>
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+                <?php while ($reserva = $reservas_result->fetch(PDO::FETCH_ASSOC)) : ?>
+                    <tr>
+                        <td><?= $reserva['id_reserve']; ?></td>
+                        <td><?= $reserva['book_title']; ?></td>
+                        <td><?= $reserva['name_student']; ?></td>
+                        <td><?= date('d/m/Y', strtotime($reserva['booking_day'])); ?></td>
+                        <td><?= date('d/m/Y', strtotime($reserva['return_day'])); ?></td>
+                    </tr>
+                <?php endwhile; ?>
+            </tbody>
+        </table>
+    </div>
 </body>
 </html>
