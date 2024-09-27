@@ -6,14 +6,18 @@ body {
     margin: 0;
     padding: 20px;
 }
-
-h2 {
-    text-align: center; /* Centraliza o título */
-    color: #333; /* Cor do título */
-    margin-bottom: 20px; /* Espaço abaixo do título */
+.conteiner {
+    margin-top: 100px;
+    margin-bottom: 1000px;
 }
 
-table {
+.conteiner h2 {
+    text-align: center; /* Centraliza o título */
+    color: #333; /* Cor do título */
+    margin-bottom: 70px; /* Espaço abaixo do título */
+}
+
+.conteiner table {
     width: 100%; /* Largura total da tabela */
     border-collapse: collapse; /* Junta bordas */
     margin: 0 auto; /* Centraliza a tabela */
@@ -22,14 +26,14 @@ table {
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Sombra leve */
 }
 
-th, td {
+.conteiner table th, td {
     padding: 12px; /* Espaçamento interno */
     text-align: center; /* Centraliza o texto horizontalmente */
     vertical-align: middle; /* Alinha verticalmente ao centro */
     border-bottom: 1px solid #ddd; /* Linha entre as linhas */
 }
 
-th {
+.conteiner table thead th {
     background-color: #4CAF50; /* Fundo verde para cabeçalho */
     color: white; /* Texto branco no cabeçalho */
     font-weight: bold; /* Negrito no cabeçalho */

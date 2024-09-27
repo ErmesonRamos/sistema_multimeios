@@ -4,9 +4,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lista de Alunos</title>
     <link rel="stylesheet" href="../estilos/listagem.css">
+ 
 </head>
 <body>
-<div>
+
+<div class="conteiner">
     <table>
     <h2>Livros Reservados</h2>
     <thead>
@@ -18,6 +20,7 @@
             </tr>
     </thead>
     <tbody>
+
 <?php
 include_once('../conf/conexao.php');
 
@@ -70,4 +73,7 @@ try {
 } catch (PDOException $e) {
     echo '<strong>ERRO DE PDO:</strong> ' . $e->getMessage();
 }
+
 ?>
+</div>   
+</body>

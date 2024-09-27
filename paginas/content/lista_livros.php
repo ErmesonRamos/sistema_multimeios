@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="../estilos/listagem.css">
 </head>
 <body>
-<div>
+<div class="conteiner">
     <h2>Livros Cadastrados:</h2>
     <table>
     <thead>
@@ -59,5 +59,6 @@
     ?>
     </tbody>
     </table>
+</div>
 </body>
 </html>
