@@ -16,12 +16,11 @@
             <th>Gênero</th>
             <th>Capa</th>
         </tr>
-    </thead>
-    <tbody>
+    
     <?php
     include_once('../conf/conexao.php');
 
-        $select = "SELECT * FROM tb_book ORDER BY id_book DESC LIMIT 6";
+        $select = "SELECT * FROM tb_book ORDER BY id_book";
         
         try{
             $result = $conect->prepare($select);
@@ -46,6 +45,8 @@
         <a href="home.php?acao=deletarLivros&idDel=<?php echo $show->id_book; ?>" class="remove-btn" onclick="return confirm('Deseja remover o livro?')">Deletar</a>
     </td>
     </tr>
+    </thead>
+    <tbody>
 
     <?php
                 }
