@@ -1,14 +1,34 @@
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Alunos</title>
+    <link rel="stylesheet" href="../estilos/listagem.css">
+</head>
+<body>
+<div>
+    <table>
+    <h2>Livros Reservados</h2>
+    <thead>
+            <tr>
+                <th>Livro</th>
+                <th>Aluno</th>
+                <th>D.Reserva</th>
+                <th>Retorno</th>
+            </tr>
+    </thead>
+    <tbody>
 <?php
 include_once('../conf/conexao.php');
 
-// Consulta para obter as reservas
-$reservas_query = "
+$select = "
     SELECT 
-        r.id_reserve, 
-        b.title AS book_title, 
-        s.name_student, 
-        r.booking_day, 
-        r.return_day 
+        r.id_reserve,
+        b.title,
+        s.name_student,
+        r.booking_day,
+        r.return_day,
+        b.book_cover
     FROM 
         tb_reserve r
     JOIN 
@@ -16,62 +36,38 @@ $reservas_query = "
     JOIN 
         tb_student s ON r.id_student = s.id_student
     ORDER BY 
-        r.booking_day DESC";
-$reservas_result = $conect->query($reservas_query);
-?>
-
-<!DOCTYPE html>
-<html lang="pt_br">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lista de Reservas</title>
+        r.id_reserve DESC 
+    LIMIT 10";
+        
+try {
+    $result = $conect->prepare($select);
+    $cont = 1;
+    $result->execute();
     
-    <style>
-        .conteiner {
-            margin-top: 50px;
-            margin-bottom: 800px;
+    $contar = $result->rowCount();
+    if ($contar > 0) {
+        while ($show = $result->FETCH(PDO::FETCH_OBJ)) {
+?>
+    <tr id="task-list" class="task-box template hide">
+        <td data-label="ID"><?php echo $cont++; ?></td>
+        <td data-label="Livro"><?php echo $show->title; ?></td>
+        <td data-label="Aluno"><?php echo $show->name_student; ?></td>
+        <td data-label="D.Reserva"><?php echo $show->booking_day; ?></td>
+        <td data-label="Retorno"><?php echo $show->return_day; ?></td>
+        <td data-label="Foto">
+            <img src="../img/capas_livros/<?php echo $show->book_cover; ?>" alt="Foto">
+        </td>
+        <td data-label="Ações">
+            <a href="home.php?acao=editarReservas&idUpdate=<?php echo $show->id_reserve; ?>" class="done-btn" title="Editar reserva">Editar</a>
+            <a href="home.php?acao=deletarReservas&idDel=<?php echo $show->id_reserve; ?>" class="remove-btn" onclick="return confirm('Deseja apagar a reserva?')">Deletar</a>
+        </td>
+    </tr>
+<?php
         }
-        table {
-            width: 80%;
-            margin: 20px auto;
-            border-collapse: collapse;
-        }
-        th, td {
-            border: 1px solid #ddd;
-            padding: 8px;
-            text-align: center;
-        }
-        th {
-            background-color: #f2f2f2;
-        }
-    </style>
-</head>
-<body>
-    <div class="conteiner">
-        <h2 style="text-align:center;">Lista de Reservas</h2>
-        <table>
-            <thead>
-                <tr>
-                    <th>ID Reserva</th>
-                    <th>Título do Livro</th>
-                    <th>Nome do Aluno</th>
-                    <th>Data de Reserva</th>
-                    <th>Data de Devolução</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php while ($reserva = $reservas_result->fetch(PDO::FETCH_ASSOC)) : ?>
-                    <tr>
-                        <td><?= $reserva['id_reserve']; ?></td>
-                        <td><?= $reserva['book_title']; ?></td>
-                        <td><?= $reserva['name_student']; ?></td>
-                        <td><?= date('d/m/Y', strtotime($reserva['booking_day'])); ?></td>
-                        <td><?= date('d/m/Y', strtotime($reserva['return_day'])); ?></td>
-                    </tr>
-                <?php endwhile; ?>
-            </tbody>
-        </table>
-    </div>
-</body>
-</html>
+    } else {
+        echo '<tr><td colspan="6">Nenhuma reserva encontrada.</td></tr>';
+    }
+} catch (PDOException $e) {
+    echo '<strong>ERRO DE PDO:</strong> ' . $e->getMessage();
+}
+?>
