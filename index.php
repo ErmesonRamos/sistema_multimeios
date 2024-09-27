@@ -1,10 +1,13 @@
 <?php
-include_once('conf/conexao.php');
-ob_start(); //armazena dados em cache
-session_start();
-if(isset($_SESSION['loginUser']) && (isset($_SESSION['senhaUser']))){
-    header("Location: home.php");
-}
+  
+  session_start(); 
+
+  // Verifica se o usuário está autenticado (verifica se a sessão está ativa e se o usuário está logado)
+  if (isset($_SESSION['loginUser']) && $_SESSION['senhaUser'] === true) {
+      // Redireciona para a página home
+      header("Location: paginas/home.php");
+  }
+  
 ?>
 
 <!DOCTYPE html>
@@ -40,6 +43,18 @@ if(isset($_SESSION['loginUser']) && (isset($_SESSION['senhaUser']))){
           <input type="submit" name="login" value="Entrar">
         </form>
         <?php
+
+        if (isset($_GET['acao'])) {
+          $acao = $_GET['acao'];
+          if ($acao == 'negado') {
+              echo '<strong>Erro ao Acessar o sistema!</strong> Efetue o login ;(';
+            
+          } elseif ($acao == 'sair') {
+              echo '<strong>Você fez logout do sistema.</strong>';
+            
+          }
+        }
+
         if(isset($_POST['login'])){
           $login = filter_input(INPUT_POST, 'email', FILTER_DEFAULT);
           $senha = filter_input(INPUT_POST, 'senha', FILTER_DEFAULT);
