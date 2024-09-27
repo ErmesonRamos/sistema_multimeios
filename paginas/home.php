@@ -28,4 +28,6 @@ $pagina_incluir = isset($paginas[$acao]) ? $paginas[$acao] : $paginas['bemvindo'
 // Incluir a página correspondente
 include_once($pagina_incluir);
 
+
 include_once('../includes/footer.php');
+
