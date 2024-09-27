@@ -18,7 +18,7 @@ body {
 }
 
 .conteiner table {
-    width: 80%; /* Largura total da tabela */
+    width: 100%; /* Largura total da tabela */
     border-collapse: collapse; /* Junta bordas */
     margin: 0 auto; /* Centraliza a tabela */
     background-color: #fff; /* Fundo branco */
