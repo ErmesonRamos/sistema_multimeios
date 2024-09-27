@@ -27,9 +27,10 @@ include_once('conf/conexao.php');
             <input type="text" name="anome" placeholder="Nome" required>
             <input type="email" name="aemail" placeholder="E-mail" required>
             <input type="password" name="asenha" placeholder="Senha" required>
+            <br>
+            <input type="submit" name="cadastrar" value="Cadastrar-se">
         </div>
-      
-        <input type="submit" name="cadastrar" value="Cadastrar-se">
+    
           </form>
           <?php
             if(isset($_POST['cadastrar'])){
