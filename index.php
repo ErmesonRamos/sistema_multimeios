@@ -1,6 +1,9 @@
 <?php
+
+  include_once('conf/conexao.php');
   
   session_start(); 
+
 
   // Verifica se o usuário está autenticado (verifica se a sessão está ativa e se o usuário está logado)
   if (isset($_SESSION['loginUser']) && $_SESSION['senhaUser'] === true) {
